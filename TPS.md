@@ -1,14 +1,14 @@
-# TPS REPORT
-## Big Project
-### Devlopers
-Apolinar Ortega | Antonio Ruiz | Jacob C Darling
---- | --- | --- 
+# Big Project
 
-## This Week: 11/27/2017
+## TPS REPORT: _12/4/2017_
 Task | Developer | Risk | Est. Time (hrs) | Actual (hrs) | Progress | Code Review
 --- | --- | --- | --- | --- | --- | ---
-RShiny Spikes | Apolinar  | mid | 4 | 4 | 50% | ...
-GGPLOT Spikes | Antonio | mid | 4 | 0 | 0% | ---
-Exploring Data | Jacob | mid | 4 | 4 | 50% | .-.
-Meet w/ Dr. McKean | Jacob & Antonio | low | 1 | 1 | 1000% | .-.
-Fasibility Report | Antonio | low | 2 | 2 | 1000% | -.-
+Meeting | Jake, Apolinar, Antonio | low | 2 | 2 | 100% | ---
+R Shiny Front End Spikes | Antonio & Jake | mid | 4 | 0 | 0% | 
+Web App Back-End Spikes | Apolinar  | mid | 4 | 0 | 0% | 
+GGPLOT Spikes | Antonio | mid | 4 | 0 | 0% | 
+Exploring the Data | Jake | mid | 4 | 4 | 50% | 
+
+## Devlopers
+Apolinar Ortega | Antonio Ruiz | Jacob C Darling
+--- | --- | --- 
