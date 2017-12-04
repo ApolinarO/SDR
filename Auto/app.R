@@ -1,6 +1,7 @@
 library(shiny)
 library(MASS)
-
+library(ISLR)
+install.packages("ISLR")
 data <- Auto
 View(data)
 attach(data)

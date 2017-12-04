@@ -1,5 +1,5 @@
-install.packages("shiny")
-install.packages("DT")
+#install.packages("shiny")
+#install.packages("DT")
 
 library(shiny)
 library(DT)
