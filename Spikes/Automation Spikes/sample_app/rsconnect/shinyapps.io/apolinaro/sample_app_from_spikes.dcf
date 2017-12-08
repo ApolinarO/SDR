@@ -1,0 +1,10 @@
+name: sample_app_from_spikes
+title: sample_app_from_spikes
+username:
+account: apolinaro
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 246275
+bundleId: 1123581
+url: https://apolinaro.shinyapps.io/sample_app_from_spikes/
+when: 1512754180.38595

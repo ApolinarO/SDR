@@ -36,8 +36,8 @@ slider.and.histogram.page = function()
 }
 
 #hello.page()
-slider.and.histogram.page()
-#runExample("01_hello")
+#slider.and.histogram.page()
+runExample("01_hello")
 
 # NOTES
 # http://shiny.rstudio.com/
