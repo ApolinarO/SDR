@@ -4,13 +4,13 @@
 # Invokes r files
 	# In a real-world application, this will invoke several R files
 run_tests:
-	RScript tests.R
+	Rscript tests.R
 	#cd ./Source/app1; RScript test
 	#cd ./Source/app2; RScript test
 	#cd ./Source/app3; RScript test
 
 deploy:
-	RScript deploy.R
+	Rscript deploy.R
 	#push project to server
 
 update_db:

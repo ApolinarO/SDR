@@ -1,6 +1,6 @@
 library("shiny")
 # Defines UI for the App
-ui = fluidPage("Hello World7")
+ui = fluidPage("Hello World 8")
 
 # Defines server Logic
 server = function(input, output){}
