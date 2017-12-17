@@ -13,6 +13,10 @@ Web App Back-End Spikes | Apolinar  | mid | 4 | 0 | 0% |
 GGPLOT Spikes | Antonio | mid | 4 | 0 | 0% | 
 Version Control Documentation | Apolinar  | low | 4 | 0 | 0% | 
 Standards | Apolinar | mid  | 4 | 0 | 0% | 
+Sas to Csv Function | Jake | low  | 1 | 0.5 | 100% | 
+Data Frame subset spikes | Jake | low  | 1 | 0 | 0% |
+Data Frame merging spikes | Jake | low  | 1 | 0 | 0% |
+Data Frame stacking spikes | Jake | low  | 1 | 0 | 0% |
 
 ## Devlopers
 Apolinar Ortega | Antonio Ruiz | Jacob C Darling
