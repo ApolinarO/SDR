@@ -3,11 +3,6 @@
 
 # Invokes r files
 	# In a real-world application, this will invoke several R files
-run_tests:
-	Rscript tests.R
-	#cd ./Source/app1; RScript test
-	#cd ./Source/app2; RScript test
-	#cd ./Source/app3; RScript test
 
 deploy:
 	Rscript deploy.R
@@ -26,3 +21,6 @@ hello:
 
 clean:
 	rm *.sql
+	
+run: 
+	R -e "shiny::runApp('deploy')"
