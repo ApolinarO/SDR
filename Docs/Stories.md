@@ -4,30 +4,26 @@ Apolinar Ortega | Antonio Ruiz | Jacob C Darling
 --- | --- | --- 
 
 ## About
-The purpose of this project is to create an interface for accessing data from the National Health and Nutrition Examination Survey (NHANES). This interface will allow users to select different data sets, combine them, and obtain subdatasets from them. This interface would be an easier alternative for accessing the NHANES data than the current method of directly accessing it.
+This program will provide a user-friendly interface to access the NHANES data set. The interface would allow users to select and combine different data sets. The user would then download a file with the format of their choice with the selected data.
 
-## Stories
-**A)** Create a function to load dataframes into Rshiny for manipulation
+## Stories?
+**A)** The user selects a table and selects properties of that table. These properties could be any combination of the columns within the given data set.
 - *Risk*: low
 - *Time*: 2 Days
-- *Tests*: ...
+- *Tests*: Test that the right columns are selected.
 
-**B)** Create separate R data frames from the data sets DEMOGRAPHICS, LABORATORY, and EXAMINATION. Then merge those into a single data frame for adults over 20 years of age.
+
+**B)** The user selects other tables to combine with the current data set. The table can be combined any number of ways. By default, it combines using the id number.
+- *Risk*: mid
+- *Time*: 4 Days
+- *Tests*: Test that the same table cannot combine with itself.
+
+**C)** When the user has selected the tables and the properties of those tables, they are able to download it into the file format of their choice.
 - *Risk*: low
 - *Time*: 2 Days
-- *Tests*: ...
+- *Tests*: Test that the downloaded formats has the same data when turned back into the RDA format.
 
-**C)** Create a function to be able to stack dataframes based on the year. NOTE(must have same columns)
-- *Risk*: low
-- *Time*: 2 Days
-- *Tests*: ...
-
-**D)** Create functions for ggplot visualization of current dataframe
-- *Risk*: low
-- *Time*: 2 Days
-- *Tests*: ...
-
-**E)** Export dataframes to an RDA file for examination
-- *Risk*: low
-- *Time*: 2 Days
-- *Tests*: ...
+**D)** Once the user has downloaded their data, they can view the data being visualized in a series of different plots using the GGPlot library.
+- *Risk*: high
+- *Time*: 1 week
+- *Tests*: Test that the plot works on extrordinary cases such as not having data to plot.
