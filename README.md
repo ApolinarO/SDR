@@ -11,7 +11,6 @@ The purpose of this project is to create an interface for accessing data from th
 
 ### Documentaiton
  - Alongside each of the spikes, there will be a markdown file that displays basic information on what is expected of each user.
- - We will use [ROxygen2](https://cran.r-project.org/web/packages/roxygen2/vignettes/rd.html) to generate documentation.
 
 ### Resources
  - [Data](https://catalog.data.gov/dataset/national-health-and-nutrition-examination-survey-nhanes)
