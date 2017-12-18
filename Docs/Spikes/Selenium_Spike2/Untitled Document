@@ -1,0 +1,2 @@
+run:
+	Rscript Driver.R
