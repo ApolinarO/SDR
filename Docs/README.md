@@ -19,3 +19,10 @@ We will be using Github for version control
  - [MarkDown Editor](https://dillinger.io/)
  - [Print MarkDown](https://gitprint.com/)
  - [Markdown Cheat Sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+
+## NHANES Data
+ - [Data](https://www.cdc.gov/nchs/nhanes/index.htm)
+ - [Data API](https://catalog.data.gov/dataset/national-health-and-nutrition-examination-survey-nhanes)
+
+## R Shiny
+ - [R Shiny](https://shiny.rstudio.com/gallery/genome-browser.html)

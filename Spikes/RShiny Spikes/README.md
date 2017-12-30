@@ -1,7 +1,7 @@
-# app.r spike
+# R Shiny Spike
 ## Resources
-* [rshiny](http://shiny.rstudio.com/)
-* [rshiny tutorial](http://shiny.rstudio.com/tutorial/)
+* [RShiny](http://shiny.rstudio.com/)
+* [RShiny tutorial](http://shiny.rstudio.com/tutorial/)
     * Resume at 2 hrs
 * [Sample Shiny App Hosted on shinyapps.io](https://apolinaro.shinyapps.io/test1/)
 
@@ -39,3 +39,9 @@
 
 
 
+# Get Web Info Spike
+## Resources
+ - (NHANES JSON API?)[https://demo.ckan.org/api/3/action/package_show?id=adur_district_spending]
+
+## Notes
+### 
