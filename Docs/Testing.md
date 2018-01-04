@@ -28,5 +28,6 @@ The following calls runs the suite and prints the test results
  - For more information on the RUnit function calls, check out [this](https://cran.r-project.org/web/packages/RUnit/RUnit.pdf) source.
  - [R Shiny Gallery](https://shiny.rstudio.com/gallery/genome-browser.html)
 
- ## Function Testing: _Syleneum_
- Syleneum allows us to automatically test the interface of the RShiny application.
+ 
+## Function Testing: _Sylenium_
+Sylenium allows us to automatically test the interface of the RShiny application.
