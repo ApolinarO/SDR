@@ -20,7 +20,12 @@ ___
 
 __
 ## TO DO <Docuemtnation>:
- - Automation
  - RShiny
  - NHANES
  - ROxygen2 <Documentation & Coding Standards>
+
+## Complete
+ - Documentation & Coding Standards
+ - Version Control
+ - Testing
+ - Automation
