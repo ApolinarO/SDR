@@ -1,14 +1,7 @@
 # R Data Project - Libraries & Resources
 
-## Testing
-### RUnit
-Our project will consiste of unit testing. This will be done using the RUnit framework. We have an [RUnit Spike](../Spikes/RUnit%20Spikes).
-
-### Syleneum
-
-___
 ## Version Control
-We will be using Github for version control
+We will be using Github for version control.
 
 ___
 ## Documentation
@@ -24,9 +17,10 @@ ___
  - We have adopted [Google's R style guide](https://google.github.io/styleguide/Rguide.xml) as our set of standards for formatting R code.
 
 ___
+## Testing
+Our project implements RUnit for unit testing and Syleneum to automatically test the interface.
+
+___
 ## NHANES Data
  - [Data](https://www.cdc.gov/nchs/nhanes/index.htm)
  - [Data API](https://catalog.data.gov/dataset/national-health-and-nutrition-examination-survey-nhanes)
-
-## R Shiny
- - [R Shiny](https://shiny.rstudio.com/gallery/genome-browser.html)
