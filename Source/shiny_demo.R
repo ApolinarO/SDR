@@ -7,12 +7,12 @@ library(DT)
 ###create a mock app in current directory
 dir <- getwd()
 dir
-setwd("/home/tony/R/work/shiny/")
+setwd("/home/tony/SD/SDR/Source")
 
 
 runApp("App")
 runApp("Auto")
-
+runApp("File_Spike")
 
 #runExample("01_hello")      # a histogram
 #runExample("02_text")       # tables and data frames
