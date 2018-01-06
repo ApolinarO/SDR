@@ -32,8 +32,10 @@ When looking at the assignment of the _ui_ variable, a slider input is generated
 
 The server defines only a single function that takes input from the slider input identified as "num" and outputs a histogram based on its results.
 
+A sample of the above application running can be found [here](https://apolinaro.shinyapps.io/test1/).
+
 ## Resources
  - [RShiny](http://shiny.rstudio.com/)
  - [RShiny tutorial](http://shiny.rstudio.com/tutorial/)
- - [Sample Shiny App Hosted on shinyapps.io](https://apolinaro.shinyapps.io/test1/)
-More information on how we will implement automation into our program can be found alongside our [Automation Spikes](../Spikes/RShiny%20Spikes).
+ - More information on how we will implement automation into our program can be found alongside our [Automation Spikes](../Spikes/RShiny%20Spikes).
+ 
