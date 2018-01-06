@@ -1,12 +1,12 @@
 # Developer: Apolinar Ortega
 # About: The purpose of this spike is to get data from an online API. From there, it will turn XML or JSON into an R data frame
 
+library("XML")
+library("methods")
 # XML Spike:
   # Calls a web API and converts the resulting XML into a data frame
 xmlSpike = function()
 {
-  library("XML")
-  library("methods")
   
   # Query string for web api
   url = "https://www.sbir.gov/api/awards.xml?keyword=cbinsights"
@@ -53,6 +53,6 @@ jsonSpike()
   pageJS$columns
 }
 
-#xmlSpike();
-#xml("cbinsights")
+xmlSpike()
+xml("cbinsights")
 jsonSpike()
