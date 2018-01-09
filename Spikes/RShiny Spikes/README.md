@@ -2,7 +2,7 @@
 ## Resources
 - [RShiny](http://shiny.rstudio.com/)
 - [RShiny tutorial](http://shiny.rstudio.com/tutorial/)
-    - Resume at 2 hrs
+    - Resume at 1:19
 - [Sample Shiny App Hosted on shinyapps.io](https://apolinaro.shinyapps.io/test1/)
 
 ## Notes 
@@ -35,6 +35,8 @@
     * The app can be placed in two files: ui.R, server.R
     * Can upload the app onto shinyapps.io
 
+
+### Additional Notes ###
 ### Customize Reactions, Customize Appearrance
 
 
