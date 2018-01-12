@@ -126,10 +126,58 @@ slider.and.histogram.page.4 = function()
   shinyApp(ui=ui, server=server)
 }
 
+slider.and.histogram.page.5 = function()
+{
+  ui  = fluidPage(
+    sliderInput(
+      inputId="num", 
+      label="choose a number", 
+      value=25, min=1, max=100),
+    actionButton(inputId="go",
+                 label="update"),
+    plotOutput("hist")
+  )
+  
+  server = function(input, output){
+    data <- eventReactive(input$go, {
+      rnorm(input$num)
+    })
+    
+    # Creates a list of reactive values to manipulate
+    # data <- reactiveaValues(data = rnorm(100))
+    output$hist <- renderPlot({
+        hist(data())
+      })
+  }
+  shinyApp(ui=ui, server=server)
+}
+
+slider.and.histogram.page.6 = function()
+{
+  ui  = fluidPage(
+    actionButton(inputId="norm",
+                 label="Normal"),
+    actionButton(inputId="unif",
+                 label="Uniform"),
+    plotOutput("hist")
+  )
+  
+  server = function(input, output){
+    rv <- reactiveValues{data<-rnorm(100)}
+    
+    observeEvent(input$norm, {rv$data <- rnorm(100)})
+    observeEvent(input$unif, {rv$data <- runif(100)})
+    
+    output$hist <- renderPlot({
+      hist(rv$data)
+    })
+  }
+  shinyApp(ui=ui, server=server)
+}
 
 #hello.page()
 #slider.and.histogram.page()
-slider.and.histogram.page.4()
+slider.and.histogram.page.6()
 #runExample("01_hello")
 
 ### NOTES ###
