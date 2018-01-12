@@ -51,14 +51,37 @@ server <- function(input, output, session) {
       head(df)
     })
   })
+ # 
+# observeEvent(input$downloadButton, {
+#  #df <- subset.data.frame(data(),input$columns) #subsetting takes place here
+#    output$downloadData <- downloadHandler(
+#      
+#      filename = function() {
+#        paste(data.frame(data()), ".csv", sep = "")
+#      },
+#      content = function(file) {
+#        write.csv(data.frame(data()), file, row.names = FALSE)
+#      }
+#    )
+#  })
   
+#change_df <- function(){
+#  df <- subset(data.frame(data()), input$columns)
+#  return (df)
+#}
   
-  output$downloadData <- downloadHandler(
+datasetInput <- reactive({
+  
+  df <- subset(data.frame(data()), select = input$columns)
+  
+})
+output$downloadData <- downloadHandler(
+
     filename = function() {
-      paste(input$dataset, ".csv", sep = "")
+      paste(data.frame(data()), ".csv", sep = "")
     },
     content = function(file) {
-      write.csv(data.frame(data()), file, row.names = FALSE)
+      write.csv(datasetInput(), file, row.names = FALSE)
     }
   )
   
