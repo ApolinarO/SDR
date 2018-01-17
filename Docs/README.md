@@ -24,7 +24,7 @@ ___
 ## NHANES Data
  - [Data](https://www.cdc.gov/nchs/nhanes/index.htm)
  - [Data API](https://catalog.data.gov/dataset/national-health-and-nutrition-examination-survey-nhanes)
-
+- [Video](https://pic-sure.org/products/nhanes-unified-dataset)
 
 __
 ## TO Document:
