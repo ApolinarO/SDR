@@ -2,23 +2,17 @@
   # https://github.com/chiragjp/nhanes_scidata
   # https://pic-sure.org/products/nhanes-unified-dataset
 
-
-# NHANES Data Listing
-  # https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx
-# ScrapeR Information
-  # https://cran.r-project.org/web/packages/scrapeR/scrapeR.pdf
-
 library("stringr")
 library("scrapeR")
 
 # HTML page -> string
-page.source = scrape(url="https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx", parse=F)
+page.source   = scrape(url="https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx", parse=F)
 source.string = gsub("[\r\n\t]", "", toString(page.source))
 
-# Get desired table from the page
-source.table = str_match(source.string, "<table[^>]+>(.+?)</table>")[1,2]
+# Uses Regular Expressions to get desired table data from the page
+source.table      = str_match(source.string, "<table[^>]+>(.+?)</table>")[1,2]
 source.table.rows = str_match_all(source.table, "<tr>(.+?)</tr>")[[1]]
-row.data = str_match_all(source.table.rows, "<td.+?>(.+?)</td>")
+row.data          = str_match_all(source.table.rows, "<td.+?>(.+?)</td>")
 
 # Downloads data
 for(i in 1:length(row.data))
