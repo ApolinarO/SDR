@@ -7,27 +7,30 @@
 
 # SrapeR Attampt
 library("XML")
+library("stringr")
 library("scrapeR")
   # https://cran.r-project.org/web/packages/scrapeR/scrapeR.pdf
 
 # Get HTML Page
 list.url = "https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx"
 page.source = scrape(url=list.url, parse=F)
+source.string = gsub("[\r\n\t]", "", toString(page.source))
 
-# Parse document
-doc.html = htmlParse(page.source, asText=T)
-doc.root = xmlRoot(doc.html)
-doc.body = xmlChildren(xmlChildren(doc.root)$body[4])
+# Captures tables and then rows from it
+source.table = str_match(source.string, "<table[^>]+>(.+?)</table>")[1,2]
+source.table.rows = str_match_all(source.table, "<tr>(.+?)</tr>")[[1]]
 
-doc.body.div = doc.body$div
-temp = doc.body.div[5]
-temp2 = temp$form
+row.data = str_match_all(rows, "<td.+?>(.+?)</td>")
+
+# Transform into a 2d array
+the.data = array(dim=c(length(row.data),6))
+for(i in 1:length(row.data))
+{
+  item = row.data[[i]][,2]
+  link1 = link = str_match(item[3], "<a href=\"(.+?)\">(.+?)</a>")[,2:3]
+  link2 = link = str_match(item[4], "<a href=\"(.+?)\">(.+?)</a>")[,2:3]
+  the.data[i,] = c(item[1:2], link1, link2)
+}
 
 
-# Using Regular Expressions
-library(stringr)
-#grep("^\\w", c("asd", "#_##", "asp"), value=T)
-
-test.string = "<div><table>success</table></div>"
-str_extract(test.string, "<table.*>(.*)</table>")
-#grep("(<table)", test.string)
+#download.file("https://wwwn.cdc.gov/Nchs/Nhanes/1999-2000/ACQ.XPT", "testDownload", "curl")
