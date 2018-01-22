@@ -15,6 +15,7 @@ source.table.rows = str_match_all(source.table, "<tr>(.+?)</tr>")[[1]]
 row.data          = str_match_all(source.table.rows, "<td.+?>(.+?)</td>")
 
 # Downloads data
+special.cases = c()
 for(i in 1:length(row.data))
 {
   if(i %% 50 == 0)
@@ -22,16 +23,21 @@ for(i in 1:length(row.data))
   
   # Extracts desired data
   item = row.data[[i]][,2]
-  item = c( item[1:2],                                             # Year & Data File Name
+  item = c( gsub("[//\\]", "_", item[1:2]),                         # Year & Data File Name
             str_match(item[3], "<a href=\"(.+?)\">(.+?)</a>")[,2], # Documentaiton Link
             str_match(item[4], "<a href=\"(.+?)\">(.+?)</a>")[,2]) # Data Link
   
   # Download data if link available
-  if(!is.na(item[4])){
+  if(!is.na(str_match(item[4], ".*\\.aspx")[1])){
+    special.cases = c(special.cases, print(paste0("*", i, ": ", item[2], "[", item[1], "](", paste0("https://wwwn.cdc.gov/", item[4]), ")", " special case not selected")))
+  }else if(!is.na(item[4])){
     download.file(url      = paste0("https://wwwn.cdc.gov/", item[4]),
                   destfile = paste0("data/", item[2], " [", item[1], "]"),
                   method   = "curl", quiet=T)
   }else{
-    print(paste0(i, ": ", item[2], "[", item[1], "]", " was not selected"))
+    special.cases = c(special.cases, print(paste0(i, ": ", item[2], "[", item[1], "]", " was not selected")))
       }
 }
+
+# Note issue w/ [~415] 1999-2006 Duel Energy X-ray Absorptiometry - Whole Body
+  # It has an irregular data set
