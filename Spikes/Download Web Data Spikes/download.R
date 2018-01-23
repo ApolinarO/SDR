@@ -11,7 +11,7 @@ source.string = gsub("[\r\n\t]", "", toString(page.source))
 
 # Uses Regular Expressions to get desired table data from the page
 source.table      = str_match(source.string, "<table[^>]+>(.+?)</table>")[1,2]
-source.table.rows = str_match_all(source.table, "<tr>(.+?)</tr>")[[1]]
+source.table.rows = str_match_all(source.table, "<tr>(.+?)</tr>")[[1]][,2]
 row.data          = str_match_all(source.table.rows, "<td.+?>(.+?)</td>")
 
 # Downloads data
@@ -26,6 +26,7 @@ for(i in 1:length(row.data))
   item = c( gsub("[//\\]", "_", item[1:2]),                         # Year & Data File Name
             str_match(item[3], "<a href=\"(.+?)\">(.+?)</a>")[,2], # Documentaiton Link
             str_match(item[4], "<a href=\"(.+?)\">(.+?)</a>")[,2]) # Data Link
+  print(paste0(i, ": ", item[2], "[", item[1], "]"))
   
   # Download data if link available
   if(!is.na(str_match(item[4], ".*\\.aspx")[1])){
