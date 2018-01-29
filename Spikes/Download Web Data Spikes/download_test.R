@@ -13,7 +13,8 @@ test.formatRowData <-function(){
   checkException(formatRowData(c("1", "2", "3"), 1)) # Too few in arguments
   
   res = formatRowData(c("2001-2020", "The Data Name", "<a href=\"as.XPT\">something</a>", "<a href=\"as2.XPT\">something else</a>"), 1)
-  checkTrue(res["Download Link"] != "as2.XPT", "Test failed")
+  checkEquals("https://wwwn.cdc.gov/as2.XPT", res["Download Link"])
+  #checkTrue(res["Download Link"] != "as2.XPT", "Test failed")
   #checkEquals("", )
   
 }
