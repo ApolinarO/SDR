@@ -46,7 +46,7 @@ formatRowData <- function(row.item, index){
     "Name"    = data.name,
     "Documentation Link" = str_match(row.item[3], "<a href=\"(.+?)\">(.+?)</a>")[,2],
     "Download Link"      = str_match(row.item[4], "<a href=\"(.+?)\">(.+?)</a>")[,2],
-    "File Name"= paste0(data.name, "[", row.item[1], "]"),
+    "File Name"= paste0(data.name, "[", row.item[1], "].XPT"),
     "Index"    = index
     )
   
@@ -97,12 +97,12 @@ tokenizeString <- function(strings){
   #   string: string to tokenize
   #
   # Returns: a sanitized string
-  temp = gsub("[//\\]", "_", strings)
+  temp = gsub("[//\\,]", "_", strings)
   temp = gsub("&amp;", "&", temp)
   return(temp)
   }
 
-runDownload <- function(log.file="special cases.txt"){
+runDownload <- function(log.file="special cases.txt", documentation.file="documentation links.txt"){
   # Scrapes the NHANES list for data
   #
   # Args:
@@ -112,4 +112,10 @@ runDownload <- function(log.file="special cases.txt"){
   special.cases <- downloadData(row.data)
   
   writeLines(special.cases, con=log.file, sep="\n")
+
+  # Documentation Links
+  var <-c()
+  for(item in row.data)
+  	var <- c(var, paste0(item["File Name"], ",", item["Documentation Link"]))
+  writeLines(var, con=documentation.file, sep="\n")
   }
