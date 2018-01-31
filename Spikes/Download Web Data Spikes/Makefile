@@ -8,7 +8,7 @@ test:
 run:
 	read -p "You are about to download a lot of data (~4 GB). •If you wish to continue, hit enter. •If you wish to exit, hit CTRL+C."
 	RScript -e \
-		'source("download.R"); runDownload()'
+		'source("download.R"); runDownload(); runDownload2()'
 clean:
 	rm -f *.txt
 	cd ./data; rm -f *.XPT

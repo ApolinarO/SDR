@@ -1,6 +1,10 @@
 # Download Web Data Spike
 This Spike is meant to prove that it is possible to automate the download of the entire NHANES data set. This project works mainly through the use of regular expressions.
 
+## RDC Only
+
+You may have noticed that if you follow the NHANES link that some files are listed as "RDC Only". This is data protected by the Research Data Center. More information [here](https://www.cdc.gov/rdc/).
+
 ## Step 1: Extract data listings
 
 The program starts by looking at a page that lists all of the [data download links for NHANES](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx).

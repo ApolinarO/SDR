@@ -75,7 +75,7 @@ downloadData <- function(row.data){
     print(paste0(i, ": ", item["File Name"]))
     
     # Download data if link available
-    if(!is.na(str_match(item["Download Link"], ".*\\.XPT"))){     # Is .XPT, download
+    if(!is.na(str_match(item["Download Link"], ".*\\.(?:XPT|xpt)"))){     # Is .XPT, download
       download.file(url      = item["Download Link"],
                     destfile = paste0("./data/", item["File Name"]),
                     method   = "curl", quiet = T)
@@ -100,22 +100,79 @@ tokenizeString <- function(strings){
   temp = gsub("[//\\,]", "_", strings)
   temp = gsub("&amp;", "&", temp)
   return(temp)
-  }
+}
+
+write.files <- function(special.cases, row.data, log.file, documentation.file, append.file=F){
+  # Creates file for special cases and for linking documentation to file
+  #
+  # Args:
+  #  special.cases: special cases
+  #  row.data: row data
+  #  log.file: file storing the special cases
+  #  documentation.file: file linking other files to documentation
+  write(special.cases, file=log.file, sep="\n", append=append.file)
+  
+  # Documentation Links
+  var <-c()
+  for(item in row.data)
+    var <- c(var, paste0(item["File Name"], ",", item["Documentation Link"]))
+  write(var, file=documentation.file, sep="\n", append=append.file)
+}
 
 runDownload <- function(log.file="special cases.txt", documentation.file="documentation links.txt"){
   # Scrapes the NHANES list for data
   #
   # Args:
   #   log.file: file in which to log the special cases
+  #   documentation.file: file in which to link file names and the documentation
   source.string <- downloadListPage()
   row.data <- gatherRowDataFromList(source.string)
   special.cases <- downloadData(row.data)
   
-  writeLines(special.cases, con=log.file, sep="\n")
+  # 
+  write.files(special.cases, row.data, log.file, documentation.file, T)
+  
+  #writeLines(special.cases, con=log.file, sep="\n")
 
   # Documentation Links
-  var <-c()
-  for(item in row.data)
-  	var <- c(var, paste0(item["File Name"], ",", item["Documentation Link"]))
-  writeLines(var, con=documentation.file, sep="\n")
+  #var <-c()
+  #for(item in row.data)
+  #	var <- c(var, paste0(item["File Name"], ",", item["Documentation Link"]))
+  #writeLines(var, con=documentation.file, sep="\n")
+}
+
+# Runs the download on the missing data
+runDownload2 <-function(url="https://wwwn.cdc.gov/Nchs/Nhanes/Dxa/Dxa.aspx", log.file="special cases.txt", documentation.file="documentation links.txt"){
+  # Scrapes data for a specific item
+  #
+  # Args:
+  #   url: where this data is located at
+  #   log.file: file in which to log the special cases
+  #   documentation.file: file in which to link file names and the documentation
+  source.string <- downloadListPage(url)
+  
+  # Gets desired row data
+  data.items <- str_match_all(source.string, "<h4>([\\d-]+)</h4>(.+?</ul>)")
+  data.items <- data.items[[1]][,2:3]
+  row.data = str_match_all(data.items[,2], "<li>(.+?)</li>")
+  
+  # Formats row data
+  for(i in 1:length(row.data)){
+    item = c(
+      "Year(s)" = data.items[i,1],
+      "Name"    = "Dual-Energy X-ray Absorptiometry - Whole Body (Multiply Imputed Data)",
+      "Documentation Link" = str_match(row.data[[i]][2,2], "<a href=\"(.+?)\">(.+?)</a>")[,2],
+      "Download Link"      = str_match(row.data[[i]][1,2], "<a href=\"(.+?)\">(.+?)</a>")[,2],
+      "File Name"= "",
+      "Index"    = i
+    )
+    item["File Name"] = paste0(item["Name"], "[", item["Year(s)"], "].XPT")
+    item["Download Link"] = paste0("https://wwwn.cdc.gov/Nchs/", str_match(item["Download Link"], "(\\.+/)+(.*)")[3])
+    item["Documentation Link"] = paste0("https://wwwn.cdc.gov/Nchs/", str_match(item["Documentation Link"], "(\\.+/)+(.*)")[3])
+    
+    row.data[[i]] = item
   }
+  
+  special.cases <- downloadData(row.data)
+  write.files(special.cases, row.data, log.file, documentation.file, T)
+}
