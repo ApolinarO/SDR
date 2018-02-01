@@ -11,11 +11,11 @@ To run the program as of now, the user must run it through the bash terminal.
 
 	make
 
-3. If a _data_ folder does not exist alongside this project, then make the directory.
+3. If a folder called _/data_ does not exist alongside this project, then make the directory.
 
 	mkdir data
 
-4. Run the tests. Note that this may take a while. The tests start running when the following is entered:
+4. Run the main program. Note that this may take a while. Enter the following:
 
 	make run
 
@@ -27,8 +27,10 @@ To run the program as of now, the user must run it through the bash terminal.
 
 	file name[year1-year2].ZPT,url
 
-    - In this process, be sure to download the _Dual-Energy X-ray Absorptiometry - Whole Body_ data set.
+    - In this step, ignore the  _Dual-Energy X-ray Absorptiometry - Whole Body_ data set.
 
+
+# About the program
 
 ## RDC Only
 
