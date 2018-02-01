@@ -1,6 +1,35 @@
 # Download Web Data Spike
 This Spike is meant to prove that it is possible to automate the download of the entire NHANES data set. This project works mainly through the use of regular expressions.
 
+## User Guide
+
+To run the program as of now, the user must run it through the bash terminal.
+
+1. On the terminal, cd into this application's directory
+
+2. Run tests by entering the following into the terminal
+
+	make
+
+3. If a _data_ folder does not exist alongside this project, then make the directory.
+
+	mkdir data
+
+4. Run the tests. Note that this may take a while. The tests start running when the following is entered:
+
+	make run
+
+5. Once the tests have run, you will now have to deal with the special cases. A log file under the name of _special cases.txt_ contains a list of which data sets could not be downloaded.
+
+    - In this step, get a list of all the lines marked with a _*_ at the beginning. Those you will have to download by hand. The data for them can be found [here](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx).
+    - When downloading the data, make sure to add it into the _/data_ folder and to have it in the XPT format.
+    - Finally, look into the _documentation links.txt_ file. For each file added to _/data_, add a line containing the file name and the link to the documentation. It should look like the following:
+
+	file name[year1-year2].ZPT,url
+
+    - In this process, be sure to download the _Dual-Energy X-ray Absorptiometry - Whole Body_ data set.
+
+
 ## RDC Only
 
 You may have noticed that if you follow the NHANES link that some files are listed as "RDC Only". This is data protected by the Research Data Center. More information [here](https://www.cdc.gov/rdc/).
