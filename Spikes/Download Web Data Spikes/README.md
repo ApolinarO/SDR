@@ -28,9 +28,10 @@ To run the program as of now, the user must run it through the bash terminal.
 	file name[year1-year2].ZPT,url
 
     - In this step, ignore the  _Dual-Energy X-ray Absorptiometry - Whole Body_ data set.
+    	- For that data set, look at this [additional documentation](https://wwwn.cdc.gov/Nchs/Nhanes/Dxa/Dxa.aspx).
 
 
-# About the program
+# About The Program
 
 ## RDC Only
 

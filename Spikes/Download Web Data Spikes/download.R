@@ -167,8 +167,8 @@ runDownload2 <-function(url="https://wwwn.cdc.gov/Nchs/Nhanes/Dxa/Dxa.aspx", log
       "Index"    = i
     )
     item["File Name"] = paste0(item["Name"], "[", item["Year(s)"], "].XPT")
-    item["Download Link"] = paste0("https://wwwn.cdc.gov/Nchs/", str_match(item["Download Link"], "(\\.+/)+(.*)")[3])
-    item["Documentation Link"] = paste0("https://wwwn.cdc.gov/Nchs/", str_match(item["Documentation Link"], "(\\.+/)+(.*)")[3])
+    item["Download Link"] = paste0("https://wwwn.cdc.gov/Nchs/", str_match(item["Download Link"], "(data|nhanes).+")[1])
+    item["Documentation Link"] = paste0("https://wwwn.cdc.gov/Nchs/", str_match(item["Documentation Link"], "(data|nhanes).+")[1])
     
     row.data[[i]] = item
   }
