@@ -1,19 +1,18 @@
 # Big Project
 
-## TPS REPORT: 1/26/2018
+## TPS REPORT: 1/29/2018
 Task | Developer | Risk | Est. Time (hrs) | Actual (hrs) | Progress | Code Review
 --- | --- | --- | --- | --- | --- | ---
-Download Web Data Spikes | Apolinar | mid | 3 | 6 | 100% | --
-Download NHANES Data Set | Apolinar | low | 8 | 6 | 75% | --
-Clean Up RShiny & RUnit Spikes | Apolinar | low | 1 | 4 | 75% | --
-ROxygen2 Spikes | Apolinar | mid | 2 | 0 | 0% | --
-CRAN Spikes | Apolinar | mid | 4 | 0 | 0% | --
 Sas to Csv Function | Jake | low  | 1 | 0.5 | 100% | 
+Team Meeting | Everyone | low | 1 | 1 | 100% | ---
+R Shiny Front End Spikes | Antonio | mid | 4 | 3 | 70% | 
+Testing For Downloading Web Data | Apolinar | low | 2 | 2 | 50% | 
 Data Frame subset spikes | Jake | low  | 1 | 0 | 50% |
+Exploring the Data | Jake | mid | 4 | 4 | 50% | 
 Data Frame merging spikes | Jake | low  | 1 | 0 | 20% |
 Data Frame stacking spikes | Jake | low  | 1 | 0 | 20% |
-Exploring the Data | Jake | mid | 4 | 4 | 50% | 
-R Shiny Front End Spikes | Antonio | mid | 4 | 3 | 70% | 
+ROxygen2 Spikes | Apolinar | mid | 2 | 0 | 0% | --
+CRAN Spikes | Apolinar | mid | 4 | 0 | 0% | --
 
 
 ## Devlopers
