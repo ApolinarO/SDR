@@ -4,14 +4,57 @@ The purpose of this spike is to learn about what server options we have for host
 
 # TO DO
 Look At
-	- Amazon Web Services
+- Amazon Web Services
+	https://aws.amazon.com/s3/?hp=tile&so-exp=below
+- Use online Storage?
+- Azure Storage?
+
+R Shiny server on AWS instance
+https://www.r-bloggers.com/installing-rstudio-shiny-server-on-aws/
+http://ipub.com/aws/
+
+Cheap Web Hosting
+
+Local Web Hosting On Mac
+https://medium.com/@JohnFoderaro/how-to-set-up-apache-in-macos-sierra-10-12-bca5a5dfffba
+
+
+
+https://apolinaro.000webhostapp.com
 
 Test
-	- Shiny Server on Mac
-	- Shiny Server on Ubuntu machine
-	- Test Data Access Application
-		- Tests whether or not accessing NHANES would require a large instance Size
-	- Implementing a remote server
+- Shiny Server on Mac
+- Shiny Server on Ubuntu machine
+- Test Data Access Application
+	- Tests whether or not accessing NHANES would require a large instance Size
+- Implementing a remote server
+
+## What is a DNS?
+https://www.namecheap.com/support/knowledgebase/article.aspx/9717/2232/what-is-dnssec
+translates domain names into ip addresses
+	attatches IP addresses t domain names
+	DNS: domain name servers; converts ip addresses to domain name and ivce versa
+
+Web server from A-Z
+https://www.thesitewizard.com/gettingstarted/startwebsite.shtml
+
+## Amazon Web Services
+
+Light Sale Pricing (Unix OS): $5-$80 per month
+- 512-8GB MB memory
+- 1-2 Core(s) Processor
+- 20GB-80GB SSD Storage
+- 1TB-5TB Transfer
+
+Lightsail Includes
+- Static IP Address
+- DNS Management
+- Server Monitoring
+- SSH Terminal
+
+Free Teir
+- 12 month free trial OR ...
+- 
 
 
 ## RStudio Connect
@@ -73,6 +116,8 @@ For long-term storage, shinyapps.io is not suggested. It can be suitable for tes
 - [App Maximum Size](https://support.rstudio.com/hc/en-us/articles/219449487--How-much-data-can-I-upload-to-shinyapps-io-)
 
 ### Amazon Web Services
+- [Lightsail Pricing & Capabilities](https://aws.amazon.com/lightsail/)
+- [Free Version](https://aws.amazon.com/free/)
 
 ### WMU Linux Server
 
