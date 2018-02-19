@@ -7,5 +7,6 @@ t.suite = defineTestSuite("download.web.data", ".",
 if(!isValidTestSuite(t.suite)){
   print("Invalid test suite created!")
 }
-t.results = runTestSuite(t.suite)
+
+t.results = runTestSuite(t.suite, verbose=F)
 printTextProtocol(t.results)

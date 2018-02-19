@@ -2,7 +2,58 @@ library(shiny)
 library(DT)
 library(dplyr)
 
+# Spike to add file into select list item
+test.files.in.select.list <- function(){
+  files = list.files("./NHANES_CSV/2007_2008", all.files=F, full.names=F)#, recursive=T, include.dirs=F)
+  files = gsub("\\.\\w+", "", files)
+  items = 1:length(files)
+  names(items) = files
+  
+  ui <- fluidPage(
+    selectInput("data.set", h3("Select Data Set"), choices=items, selected=1)
+  )
+  
+  server = function(input, output, session){
+    output$data.set = renderText({
+      outpout$data.set
+      })
+  }
+  shinyApp(ui=ui, server=server)
+}
 
+# Spike to donload file from select list item
+test.page <- function(){
+  files = list.files("./NHANES_CSV/2007_2008", all.files=F, full.names=F)#, recursive=T, include.dirs=F)
+  files = gsub("\\.\\w+", "", files)
+  items = 1:length(files)
+  names(items) = files
+  
+  ui <- fluidPage(
+    selectInput("data.set", h3("Select Data Set"), choices=items, selected=1),
+    downloadButton('downloadData', 'Download')
+  )
+  
+  server = function(input, output){
+    output$downloadData <- downloadHandler(
+      filename = function() {
+        paste0("/NHANES_CSV/2007_2008", input$data.set, ".csv")
+        
+        str(input$data.set)
+        #paste(data.frame(data()), ".csv", sep = "")
+      },
+      content = function(file) {
+        write.csv(read.csv(input$data.set), file, row.names=F)
+        #write.csv()
+        #write.csv(datasetInput(), file, row.names = FALSE)
+      }
+    )
+  }
+  shinyApp(ui=ui, server=server)
+}
+test.page()
+
+if(F)
+{
 ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
@@ -182,3 +233,4 @@ output$downloadData <- downloadHandler(
 }
 
 shinyApp(ui, server)
+}
