@@ -119,6 +119,23 @@ write.files <- function(special.cases, row.data, log.file, documentation.file, a
   write(var, file=documentation.file, sep="\n", append=append.file)
 }
 
+RunChecks <- function(){
+  # To be run before the downloads are run. This checks to make sure that user is in the right directory and that /data exists.
+  
+  # Check if in parent directory
+  parent.dirs = tail(unlist(strsplit(getwd(), "/")), 3)
+  if(any(parent.dirs != c("SDR", "Spikes", "Download Web Data Spikes"))){
+    print("ERROR! You are not running this under '/SDR/Spikes/Download Web Data Spikes'!")
+    stop()
+  }
+  
+  # Create /data if it doesn't already exist
+  if(!dir.exists(file.path(getwd(), "data"))){
+    print("'/data' directory created for you")
+    dir.create("data")
+  }
+}
+  
 runDownload <- function(log.file="special cases.txt", documentation.file="documentation links.txt"){
   # Scrapes the NHANES list for data
   #
@@ -128,17 +145,7 @@ runDownload <- function(log.file="special cases.txt", documentation.file="docume
   source.string <- downloadListPage()
   row.data <- gatherRowDataFromList(source.string)
   special.cases <- downloadData(row.data)
-  
-  # 
   write.files(special.cases, row.data, log.file, documentation.file, T)
-  
-  #writeLines(special.cases, con=log.file, sep="\n")
-
-  # Documentation Links
-  #var <-c()
-  #for(item in row.data)
-  #	var <- c(var, paste0(item["File Name"], ",", item["Documentation Link"]))
-  #writeLines(var, con=documentation.file, sep="\n")
 }
 
 # Runs the download on the missing data

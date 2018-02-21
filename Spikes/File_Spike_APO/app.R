@@ -215,10 +215,11 @@ test.select.by.year.then.file <- function(){
         input$data.set
       },
       content = function(file) {
-        file.copy(from=paste0("./NHANES_CSV/", input$year.folder, "/", input$data.set), to=file)
+        file.copy(from=file.path(".", "NHANES_CSV", input$year.folder, input$data.set), to=file)
       }
     )
   }
   shinyApp(ui=ui, server=server)
 }
-test.page()
+#test.page()
+test.select.by.year.then.file()
