@@ -1,16 +1,14 @@
 library(shiny)
-library(DT)
-library(dplyr)
 
-# Spike to add file into select list item
+# Spike that populates a select list input from local files
+  # Uses data from /NHANES_CSV/2007_2008
 test.files.in.select.list <- function(){
-  files = list.files("./NHANES_CSV/2007_2008", all.files=F, full.names=F)#, recursive=T, include.dirs=F)
+  files = list.files("./NHANES_CSV/2007_2008", all.files=F, full.names=F)
   files = gsub("\\.\\w+", "", files)
-  items = 1:length(files)
-  names(items) = files
+  names(files) = files
   
   ui <- fluidPage(
-    selectInput("data.set", h3("Select Data Set"), choices=items, selected=1)
+    selectInput("data.set", h3("Select Data Set"), choices=files, selected=1)
   )
   
   server = function(input, output, session){
@@ -21,216 +19,206 @@ test.files.in.select.list <- function(){
   shinyApp(ui=ui, server=server)
 }
 
-# Spike to donload file from select list item
-test.page <- function(){
-  files = list.files("./NHANES_CSV/2007_2008", all.files=F, full.names=F)#, recursive=T, include.dirs=F)
+# Same as the spike above, but it includes all files in /NHANES_CSV
+test.files.in.select.list.all <- function(){
+  files = list.files("./NHANES_CSV/", all.files=F, full.names=F, recursive=T, include.dirs=F)
   files = gsub("\\.\\w+", "", files)
-  items = 1:length(files)
-  names(items) = files
+  names(files) = files
   
   ui <- fluidPage(
-    selectInput("data.set", h3("Select Data Set"), choices=items, selected=1),
+    selectInput("data.set", h3("Select Data Set"), choices=files, selected=1)
+  )
+  
+  server = function(input, output, session){
+    output$data.set = renderText({
+      outpout$data.set
+    })
+  }
+  shinyApp(ui=ui, server=server)
+}
+
+# Spike to download file from select list item
+  # Uses data from /NHANES_CSV/2007_2008
+test.download.and.select.lists <- function(){
+  files = list.files("./NHANES_CSV/2007_2008", all.files=F, full.names=F)
+  files = gsub("\\.\\w+", "", files)
+  names(files) = files
+  
+  ui <- fluidPage(
+    selectInput("data.set", h3("Select Data Set"), choices=files, selected=1),
     downloadButton('downloadData', 'Download')
+  )
+  
+  server = function(input, output){
+    file.to.download <- eventReactive(input$data.set, {
+      paste0("./NHANES_CSV/2007_2008/", input$data.set, ".csv")
+    })
+    
+    output$downloadData <- downloadHandler(
+      filename = function() {
+        file.to.download()
+      },
+      content = function(file) {
+        file.copy(from=file.to.download(), to=file)
+      }
+    )
+  }
+  shinyApp(ui=ui, server=server)
+}
+
+# Spike to download the entire data set
+  # Note that it takes some time tp process
+test.download.all.zipped <- function(){
+  files.to.zip = "./NHANES_CSV"
+  
+  ui <- fluidPage(
+    downloadButton('downloadData', 'Download All')
   )
   
   server = function(input, output){
     output$downloadData <- downloadHandler(
       filename = function() {
-        paste0("/NHANES_CSV/2007_2008", input$data.set, ".csv")
-        
-        str(input$data.set)
-        #paste(data.frame(data()), ".csv", sep = "")
+        "files.zip"
       },
       content = function(file) {
-        write.csv(read.csv(input$data.set), file, row.names=F)
-        #write.csv()
-        #write.csv(datasetInput(), file, row.names = FALSE)
+        zip(zipfile=file, files=files.to.zip)
+      }
+    )
+  }
+  shinyApp(ui=ui, server=server)
+}
+
+# Spike to select multiple file to download together in a zip format
+  # Uses data from /NHANES_CSV/2007_2008
+test.download.multiple.in.zipepd <- function(){
+  files = list.files("./NHANES_CSV/2007_2008", all.files=F, full.names=F)
+  files = gsub("\\.\\w+", "", files)
+  names(files) = files
+  
+  ui <- fluidPage(
+    selectInput("data.set1", h3("Select Data Set 1"), choices=files, selected=1),
+    selectInput("data.set2", h3("Select Data Set 2"), choices=files, selected=1),
+    downloadButton('downloadData', 'Download')
+  )
+  
+  server = function(input, output){
+    file.to.download1 <- eventReactive(input$data.set1, {
+      paste0("./NHANES_CSV/2007_2008/", input$data.set1, ".csv")
+    })
+    file.to.download2 <- eventReactive(input$data.set2, {
+      paste0("./NHANES_CSV/2007_2008/", input$data.set2, ".csv")
+    })
+    
+    output$downloadData <- downloadHandler(
+      filename = function() {
+        "data.zip"
+      },
+      content = function(file) {
+        print(c(file.to.download1(), file.to.download2()))
+        zip(zipfile=file, files=c(file.to.download1(), file.to.download2()))
+      }
+    )
+  }
+  shinyApp(ui=ui, server=server)
+}
+
+# Does the same as the spike above, but with a single selectInput item
+test.download.multiple.in.zipepd2 <- function(){
+  files = list.files("./NHANES_CSV/2007_2008", all.files=F, full.names=F)
+  files = gsub("\\.\\w+", "", files)
+  names(files) = files
+  
+  ui <- fluidPage(
+    selectInput("data.set", h3("Select Data Set"), choices=files, selected=1, multiple=T),
+    downloadButton('downloadData', 'Download')
+  )
+  
+  server = function(input, output){
+    files.to.download <- eventReactive(input$data.set, {
+      paste0("./NHANES_CSV/2007_2008/", input$data.set, ".csv")
+    })
+    
+    output$downloadData <- downloadHandler(
+      filename = function() {
+        "data.zip"
+      },
+      content = function(file) {
+        zip(zipfile=file, files=files.to.download())
+      }
+    )
+  }
+  shinyApp(ui=ui, server=server)
+}
+
+# Spike that disallows two select list items to select the same items
+test.two.select.list.items <- function(){
+  files = list.files("./NHANES_CSV/2007_2008", all.files=F, full.names=F)
+  files = gsub("\\.\\w+", "", files)
+  names(files) = files
+  
+  ui <- fluidPage(
+    selectInput("data.set1", h3("Select Data Set 1"), choices=files[-1], selected=1),
+    selectInput("data.set2", h3("Select Data Set 2"), choices=files[-2], selected=2)
+  )
+  
+  server = function(input, output, session){
+    observeEvent(input$data.set1,{
+      updateSelectInput(session = session,
+                        inputId = "data.set2",
+                        choices = files[files != input$data.set1],
+                        selected = input$data.set2)
+    })
+    
+    observeEvent(input$data.set2,{
+      updateSelectInput(session = session,
+                        inputId = "data.set1",
+                        choices = files[files != input$data.set2],
+                        selected = input$data.set1)
+    })
+  }
+  shinyApp(ui=ui, server=server)
+}
+
+# Allows user to select by year and then by data set available
+test.select.by.year.then.file <- function(){
+  # Gets folders in /NHANES_CSV
+  folders = list.dirs("./NHANES_CSV")[-1]
+  folders = gsub("./NHANES_CSV/", "", folders)
+  
+  # For each sub-folder, adds in a list of thier local files
+  folders.list = list()
+  for(folder in folders){
+    files = list.files(paste0("./NHANES_CSV/", folder))
+    names(files) = gsub("\\.\\w+", "", files)
+    
+    folders.list[[folder]] = files
+  }
+  
+  ui <- fluidPage(
+    selectInput("year.folder", h3("Year"), choices=folders, selected=1),
+    selectInput("data.set", h3("Data Set"), choices=folders.list[[1]], selected=2),
+    downloadButton("download.data", "Download")
+  )
+  
+  server = function(input, output, session){
+    
+    # Updates 'Data Set' select list
+    observeEvent(input$year.folder,{
+      updateSelectInput(session = session,
+                        inputId = "data.set",
+                        choices = folders.list[[input$year.folder]]
+                        )
+    })
+    
+    output$download.data <- downloadHandler(
+      filename = function() {
+        input$data.set
+      },
+      content = function(file) {
+        file.copy(from=paste0("./NHANES_CSV/", input$year.folder, "/", input$data.set), to=file)
       }
     )
   }
   shinyApp(ui=ui, server=server)
 }
 test.page()
-
-if(F)
-{
-ui <- fluidPage(
-  sidebarLayout(
-    sidebarPanel(
-      fileInput("file1", "Choose CSV File"), #choose a file
-      
-      #check box for columns
-      #will only show up when user has selected a csv
-      checkboxGroupInput("columns","Select Columns",character(0)), #filter columns
-      
-      actionButton("updateCol","Update Columns"), #update view for columns-----why cant it work for rows?
-      actionButton("subset", "Subset Rows"), #subset is defined by its ability to filter observations (rows)
-   #   actionButton("updateRow", "Update Rows"),
-       downloadButton('downloadData', 'Download') #download 
-    
-      
-    ),
-
-    mainPanel(
-      tableOutput("table"),
-      textOutput("selected")
-    )
-  )
-)
-
-server <- function(input, output, session) {
-  
-  ###get and load data
-  data <- reactive({
-    inFile <- input$file1
-    if (is.null(inFile)) return(NULL)
-    read.csv(inFile$datapath)
-  })
-  
-  #display output
-  output$table <- renderTable({
-    req(data())
-    head(data())
-  })
-  
-  #display the possible columns you can pick from
-  observeEvent(data(), {
-    updateCheckboxGroupInput(session, "columns", choices = names(data()))
-  })
-  
-  
-  #update the table based on column selection
-  observeEvent(input$updateCol, {
-    df <- data.frame(data())
-    df <- subset(df, select = input$columns) #column selection takes place here
-    #df <- subset(df, input$col >= min(input$int) & input$col <= max(input$int))
-    # browser()
-    output$table <- renderTable({
-      req(df)
-      head(df)
-    })
-  })
-  
-  
-  
-  
-  #use server to get information from the table
-  observeEvent(input$subset,{
-    df <- data.frame(data()) 
-    str(df)
-    print("subsetting removes NAS")
-    df <- na.omit(df)
-    output$selected <- renderText(
-      #cols <- input$columns,
-      for (x in input$columns){
-        col <- select(df,contains(x))
-        ##if the column has no NAS
-        ##and if it is numeric
-        ##apply subsetting by slider
-        if(!is.na(is.numeric(x))){
-          
-            values <- select(df, contains(x))
-            print('got here')
-#            output a button to update the subset range for the slider
-           
-            
-            output$UI_slide <- insertUI(
-                selector = "#subset",
-                where = "afterEnd",
-                ui = sliderInput("int",label = x,
-                            min = min(values), max = max(values),
-                             value = c(min(values),max(values)))
-                
-                
-              ) #end UI_Button
-              print("this should not happen twice")
-             call_function(x)
-            # datasetInput <- reactive({
-            #  df <- filter(df, x >= min(input$int) & x <= max(input$int))
-              
-            #})
-            
-           
-          } #end if for numeric input
-      }#end for
-      
-    )#end output$selected 
-
-  })
-  
-  #output$table <- renderTable({
-   ## x <- reactive(
-  #    df <- data.frame(data()),
-  ##    subset(df, input$col >= min(input$int) & input$col <= max(input$int))
-   #3    )# end reactive
-  ##  req(x)
-    #head(df)
- # })
-  call_function <- function(x){
-    print("in function")
-    print(x)
-    rows <- select(df, contains(x))
-    output$UI_button <- insertUI(
-      selector = "#subset",
-      where = "afterEnd",
-      ui = actionButton("updateRow", "Update Row")
-      
-    ) #end UI_button
-    
-    observeEvent(input$updateRow, {
-      df <- data.frame(data())
-      print(str(df))
-      print(x)
-      print(rows)
-      rows <- select(df, contains(x))
-      print(rows)
-     #df <- filter(df, between(rows, min(input$int), max(input$int))) #row selection takes place here
-      df <- subset(df, rows >= min(input$int) & rows <= max(input$int))
-      output$table <- renderTable({
-        req(df)
-        head(df)
-      })
-    })
-  }
-  ##apply changes based on subset functions
-  observeEvent(input$updateSub, {
-    ##change the data frame
-    print("---got here")
-    df <- data.frame(data())
-    print(min(input$int))
-    print(max(input$int))
-    print(input$col)
-    df <- filter(df, input$int) #subsetting takes place here
-    print("got here---------")
-    # browser()
-    output$table <- renderTable({
-      req(df)
-      head(df)
-    }) #end the rendering of new table
-  })# end observeEvent
-      
-  
- 
-##REACTIVELEY for download
-datasetInput <- reactive({
-  
-  df <- subset(data.frame(data()), select = input$columns)
-  
-})
-
-
-##download the dataframe
-output$downloadData <- downloadHandler(
-
-    filename = function() {
-      paste(data.frame(data()), ".csv", sep = "") ##will add functionality for different data types later
-    },
-    content = function(file) {
-      write.csv(datasetInput(), file, row.names = FALSE)
-    }
-  )
-  
-}
-
-shinyApp(ui, server)
-}
