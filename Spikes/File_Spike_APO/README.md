@@ -36,3 +36,16 @@ This spike has two select list items and disallows either one from having the sa
 
 ### test.select.by.year.then.file
 This spike allows the user to specify the year and then the data set.
+
+### test.list.input
+This spike tests how RShiny can enumerate through each input item.
+
+### test.data.scoping
+This spike tests how RShiny can save data between sessions and data local to the session.
+
+## Resourecs
+ - Article On [Data Scope](https://shiny.rstudio.com/articles/scoping.html)
+
+## TO DO
+ - Caching Between Tabs
+
