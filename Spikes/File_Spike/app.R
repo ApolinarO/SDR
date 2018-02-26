@@ -13,11 +13,9 @@ ui <- fluidPage(
       #will only show up when user has selected a csv
       checkboxGroupInput("columns","Select Columns",character(0)), #filter columns
       
-       
       actionButton("updateCol","Update Columns"), #update view for columns-----why cant it work for rows?
       actionButton("subset", "Subset Rows"), #subset is defined by its ability to filter observations (rows)
       #   actionButton("updateRow", "Update Rows"),
-      textInput("dataName", "Name your file", width = "50%"),
       downloadButton('downloadData', 'Download') #download 
       
       
@@ -148,22 +146,15 @@ server <- function(input, output, session) {
   
   ##REACTIVELEY for download
   datasetInput <- reactive({
-    if(!is.null(input$columns)){
-      df <- subset(data.frame(data()), select = input$columns)
-      
-      
-    }
-    else{
-      df <- data.frame(data())
-    }
-   
+    
+    df <- subset(data.frame(data()), select = input$columns)
     
   })
   
   ##download the dataframe
   output$downloadData <- downloadHandler(
     filename = function() {
-      paste(input$dataName, ".csv", sep = "") ##will add functionality for different data types later
+      paste(data.frame(data()), ".csv", sep = "") ##will add functionality for different data types later
     },
     content = function(file) {
       write.csv(datasetInput(), file, row.names = FALSE)
