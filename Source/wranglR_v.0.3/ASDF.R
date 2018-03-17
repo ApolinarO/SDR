@@ -12,6 +12,7 @@
 library(shiny)
 library(DT)
 library("purrr")
+library(ISLR)
 ui <- 
   
   navbarPage("wranglR",
@@ -32,7 +33,17 @@ ui <-
                           </ul>"),
                      
                      p("Download the data Here"),
-                     downloadButton('downloadNHANES', 'Download NHANES')
+                     downloadButton('downloadNHANES', 'Download NHANES'),
+                     p("Dataset documentation"),
+                     strong("DISCLAIMER: For this small, sanitized dataset, dataframe columns are consistent across all years"),
+                     HTML("<ul>
+                       <li><a href='https://wwwn.cdc.gov/Nchs/Nhanes/2013-2014/DEMO_H.htm'>Demographics</a></li>
+                          <li><a href='https://wwwn.cdc.gov/Nchs/Nhanes/2013-2014/HEPC_H.htm'>Hepatitis C: RNA (HCV-RNA) and Hepatitis C Genotype </a></li>
+                          <li><a href='https://wwwn.cdc.gov/Nchs/Nhanes/2013-2014/TRIGLY_H.htm'>Cholesterol - LDL & Triglycerides </a></li>
+                          <li><a href='https://wwwn.cdc.gov/Nchs/Nhanes/2013-2014/HDL_H.htm'>Cholesterol - HDL</a></li>
+                          <li><a href='https://wwwn.cdc.gov/Nchs/Nhanes/2013-2014/HIV_H.htm'>HIV Antibody Test</a></li>
+                          <li><a href='https://wwwn.cdc.gov/Nchs/Nhanes/2013-2014/BMX_H.htm'>Body Measures</a></li>
+                          </ul>")
                     
              )
              ,
@@ -48,7 +59,7 @@ ui <-
                             downloadButton('downloadData', 'Download')
                           ),
                           mainPanel(
-                            tableOutput("table1"),
+                            DT::dataTableOutput("mytable1"),
                             textOutput("selected")
                           )
                         )
@@ -65,7 +76,7 @@ ui <-
                             downloadButton('downloadData2', 'Download')
                           ),
                           mainPanel(
-                            tableOutput("table2")
+                            DT::dataTableOutput("table2")
                           )
                         )
                       )
@@ -78,7 +89,7 @@ ui <-
 
 
 server <- function(input, output, session) {
-  ####	Sube Setting Data	####
+  ####	Sub Setting Data	####
   ###get and load data
   data <- reactive({
     inFile <- input$file
@@ -86,10 +97,19 @@ server <- function(input, output, session) {
     read.csv(inFile$datapath)
   })
   
+  
+  
+  
+  
+  #output$mytable1 <- DT::renderDataTable({
+   # DT::datatable(mtcars, options = list(lengthMenu = c(5, 30, 50), pageLength = 5))
+  #})
+  
   #display output
-  output$table1 <- renderTable({
-    req(data())
-    head(data())
+ output$mytable1 <- DT::renderDataTable({
+    df <- as.data.frame(data())
+    DT::datatable(df, options = list(lengthMenu = c(5, 30, 50), pageLength = 5))
+
   })
   
   #display and update column selection
@@ -123,9 +143,11 @@ server <- function(input, output, session) {
     df <- data.frame(data())
     df <- subset(df, select = input$columns) #subsetting takes place here
     # browser()
-    output$table1 <- renderTable({
-      req(df)
-      head(df)
+    output$mytable1 <- DT::renderDataTable({
+      #req(df)
+      #head(df)
+      DT::datatable(df, options = list(lengthMenu = c(5, 30, 50), pageLength = 5))
+      
     })
   })
   
@@ -149,9 +171,12 @@ server <- function(input, output, session) {
     Reduce(function(x,y) merge(x, y, by = "seqn", all.x = TRUE, all.y = TRUE),lapply(input$csvs$datapath, read.csv))
   })
   
-  output$table2 <- renderTable({
-    req(mycsvs())
-    head(mycsvs())
+  output$table2 <- renderDataTable({
+    #req(mycsvs())
+    #head(mycsvs())
+    df <- as.data.frame(mycsvs())
+    DT::datatable(df, options = list(lengthMenu = c(5, 30, 50), pageLength = 5))
+    
   })  
   output$downloadData2 <- downloadHandler(
     filename = function() {
@@ -185,8 +210,10 @@ server <- function(input, output, session) {
     })
     
     output$table3 <- renderTable({
-      req(mycsvs1())
-      head(mycsvs1())
+      #req(mycsvs1())
+      #head(mycsvs1())
+      df <- as.data.frame(mycsvs1())
+      DT::datatable(df, options = list(lengthMenu = c(5, 30, 50), pageLength = 5))      
     })
   })
   
