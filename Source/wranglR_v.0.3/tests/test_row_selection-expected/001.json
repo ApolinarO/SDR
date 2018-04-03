@@ -1,0 +1,33 @@
+{
+  "input": {
+    "columns": null,
+    "csvs": null,
+    "dataName": "",
+    "dataName2": "",
+    "file": {
+      "name": [
+        "TRIGLY_G.csv"
+      ],
+      "size": [
+        38613
+      ],
+      "type": [
+        "text/csv"
+      ],
+      "datapath": [
+        "0.csv"
+      ]
+    },
+    "rows": [
+      681,
+      1021
+    ],
+    "updateButton": 0
+  },
+  "output": {
+
+  },
+  "export": {
+
+  }
+}

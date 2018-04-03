@@ -78,7 +78,6 @@ server <- function(input, output, session) {
   Subset_Columns <- function(columns){
     slideVector <- c()
     df <- data.frame(data())
-   # print("IN THIS BITCH")
     for (x in columns){
       print(x)
       

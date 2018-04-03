@@ -1,0 +1,8 @@
+#install.packages('devtools')
+#install.packages('digest')
+#webdriver::install_phantomjs()
+#install_github("rstudio/shinytest")
+library(devtools)
+library(shinytest)
+recordTest("/HOME/SDR/Spikes/Source_versions/Auto")
+#testApp("/HOME/SDR/Spikes/Source_versions/Auto")

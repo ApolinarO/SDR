@@ -1,0 +1,89 @@
+{
+  "input": {
+    "cyl": "4",
+    "model": "All",
+    "table_cell_clicked": {
+
+    },
+    "table_rows_all": null,
+    "table_rows_current": null,
+    "table_rows_selected": null,
+    "table_search": "",
+    "table_state": null,
+    "year": 70
+  },
+  "output": {
+    "table": {
+      "x": {
+        "filter": "none",
+        "container": "<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>mpg<\/th>\n      <th>cylinders<\/th>\n      <th>displacement<\/th>\n      <th>horsepower<\/th>\n      <th>weight<\/th>\n      <th>acceleration<\/th>\n      <th>year<\/th>\n      <th>origin<\/th>\n      <th>name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>",
+        "options": {
+          "columnDefs": [
+            {
+              "className": "dt-right",
+              "targets": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+              ]
+            },
+            {
+              "orderable": false,
+              "targets": 0
+            }
+          ],
+          "order": [
+
+          ],
+          "autoWidth": false,
+          "orderClasses": false,
+          "ajax": {
+            "url": "session/d4ee009f5a5572af83e2110fb73acfe5/dataobj/table?w=&nonce=274b314ddd01a681",
+            "type": "POST",
+            "data": "function(d) {\nd.search.caseInsensitive = true;\nd.escape = true;\nvar encodeAmp = function(x) { x.value = x.value.replace(/&/g, \"%26\"); }\nencodeAmp(d.search);\n$.each(d.columns, function(i, v) {encodeAmp(v.search);});\n}"
+          },
+          "serverSide": true,
+          "processing": true
+        },
+        "selection": {
+          "mode": "multiple",
+          "selected": null,
+          "target": "row"
+        }
+      },
+      "evals": [
+        "options.ajax.data"
+      ],
+      "jsHooks": [
+
+      ],
+      "deps": [
+        {
+          "name": "dt-core",
+          "version": "1.10.12",
+          "src": {
+            "href": "dt-core-1.10.12"
+          },
+          "meta": null,
+          "script": "js/jquery.dataTables.min.js",
+          "stylesheet": [
+            "css/jquery.dataTables.min.css",
+            "css/jquery.dataTables.extra.css"
+          ],
+          "head": null,
+          "attachment": null,
+          "package": null,
+          "all_files": false
+        }
+      ]
+    }
+  },
+  "export": {
+
+  }
+}
