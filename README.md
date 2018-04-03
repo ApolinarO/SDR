@@ -8,3 +8,4 @@ The purpose of this project is to create an interface for accessing data from th
 
 ### Further Readings
  - [Article](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/)
+ - [NHANES & Licensing Info](https://www.healthdata.gov/dataset/national-health-and-nutrition-examination-survey-nhanes)
