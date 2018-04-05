@@ -241,7 +241,7 @@ server <- function(input, output, session) {
       "files.zip"
     },
     content = function(file) {
-      zip(zipfile=file, files="./NHANES_CLEAN")
+      zip(zipfile=file, files=file.path(".", "NHANES_CLEAN"))
     }
   )
   
