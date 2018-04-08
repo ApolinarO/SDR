@@ -1,5 +1,5 @@
 # R Data Project - RShiny
-The application will be devloped in RShiny. RShiny provides a front end and a backedn for small web applicaitons.
+The application will be devloped in RShiny. RShiny provides a front end and a backend for small web applicaitons.
 
 RShiny is an open R session that delivers R code. When the web page changes, the r script is returned.
 
@@ -38,4 +38,12 @@ A sample of the above application running can be found [here](https://apolinaro.
  - [RShiny](http://shiny.rstudio.com/)
  - [RShiny tutorial](http://shiny.rstudio.com/tutorial/)
  - More information on how we will implement automation into our program can be found alongside our [Automation Spikes](../Spikes/RShiny%20Spikes).
- 
+
+
+## Notes
+- Web page (UI) connected to an open R session (Server)
+	- UI manipulation causes the server to update the UI display
+	- ui() is a set of nested functions that generates the HTML
+		- input functions
+	- server() is a function that how to build and re-build the R objects in the UI
+		- output functions

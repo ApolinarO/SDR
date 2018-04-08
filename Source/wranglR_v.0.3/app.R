@@ -7,6 +7,7 @@
 #    http://shiny.rstudio.com/
 #
 
+<<<<<<< HEAD
 library(Hmisc)
 library(SASxport)
 
@@ -14,6 +15,14 @@ library(shiny)
 library(DT)
 #library("purrr")
 
+=======
+
+
+library(shiny)
+library(DT)
+library("purrr")
+library(ISLR)
+>>>>>>> 946003017209cfc129bb86fab4f3a56546260e65
 ui <- 
   
   navbarPage("wranglR",
@@ -48,6 +57,7 @@ ui <-
                       
                       )
              ,
+<<<<<<< HEAD
     
              
              tabPanel("SAS XPT to CSV Converter",
@@ -71,6 +81,8 @@ ui <-
              ,
              
              
+=======
+>>>>>>> 946003017209cfc129bb86fab4f3a56546260e65
              tabPanel("Data Selection",
                       fluidRow(
                         sidebarLayout(
@@ -106,6 +118,7 @@ ui <-
                       )
                       
                       
+<<<<<<< HEAD
              ),
              
              
@@ -126,6 +139,11 @@ ui <-
              )		
              
   )
+=======
+             ) 			
+             
+                      )
+>>>>>>> 946003017209cfc129bb86fab4f3a56546260e65
 
 
 
@@ -137,7 +155,19 @@ server <- function(input, output, session) {
     if (is.null(inFile)) return(NULL)
     read.csv(inFile$datapath)
   })
+<<<<<<< HEAD
 
+=======
+  
+  
+  
+  
+  
+  #output$mytable1 <- DT::renderDataTable({
+  # DT::datatable(mtcars, options = list(lengthMenu = c(5, 30, 50), pageLength = 5))
+  #})
+  
+>>>>>>> 946003017209cfc129bb86fab4f3a56546260e65
   #display output
   output$mytable1 <- DT::renderDataTable({
     df <- as.data.frame(data())
@@ -145,6 +175,7 @@ server <- function(input, output, session) {
     
   })
   
+<<<<<<< HEAD
   ### DATA SELECTION
   
   #display and update column selection
@@ -153,6 +184,13 @@ server <- function(input, output, session) {
     removeUI( selector = "div:has(> #rows)") ## clear up any previous slides
     updateCheckboxGroupInput(session, "columns", choices = names(data()))
     df <- data.frame(data())
+=======
+  #display and update column selection
+  observeEvent(data(), {
+    updateCheckboxGroupInput(session, "columns", choices = names(data()))
+    df <- data.frame(data())
+    print("inside this thing right here")
+>>>>>>> 946003017209cfc129bb86fab4f3a56546260e65
       insertUI(
       print("inside the slide"),
       #print(nrow(df)),
@@ -168,12 +206,35 @@ server <- function(input, output, session) {
   
   
   
+<<<<<<< HEAD
+=======
+  
+  
+  
+  #use server to get information from the table
+  observeEvent(input$subset,{
+    df <- data.frame(data()) 
+    output$selected <- renderText(
+      #cols <- input$columns,
+      for (x in input$columns){
+        print(paste("this is ", x))
+        print(typeof(x)) #views ints as char??
+      }
+      
+    )
+    
+    
+  })
+  
+  
+>>>>>>> 946003017209cfc129bb86fab4f3a56546260e65
   #update the table 
   observeEvent(input$updateButton, {
     df <- data.frame(data())
     df <- df[min(input$rows):max(input$rows),]
     print(max(input$rows))
     print(min(input$rows))
+<<<<<<< HEAD
     df <- subset(df,select = input$columns) # column subsetting takes place here
     
     output$mytable1 <- DT::renderDataTable({
@@ -190,6 +251,26 @@ server <- function(input, output, session) {
   })
   
   ##DATA SELECTION DOWNLOAD
+=======
+    df <- subset(df,select = input$columns) #subsetting takes place here
+    
+    # browser()
+    output$mytable1 <- DT::renderDataTable({
+      #req(df)
+      #head(df)
+      DT::datatable(df, options = list(lengthMenu = c(5, 30, 50), pageLength = 5))
+      
+    })
+  })
+  
+  datasetInput <- reactive({
+    
+    df <- subset(data.frame(data()), select = input$columns)
+    df <- df[min(input$rows):max(input$rows),]
+  })
+  
+  
+>>>>>>> 946003017209cfc129bb86fab4f3a56546260e65
   output$downloadData <- downloadHandler(
     filename = function() {
       paste(input$dataName, ".csv", sep = "")
@@ -199,10 +280,15 @@ server <- function(input, output, session) {
     }
   )
   
+<<<<<<< HEAD
   
   
   
   #Merging
+=======
+  #Merging
+  
+>>>>>>> 946003017209cfc129bb86fab4f3a56546260e65
   mycsvs<-reactive({
     Reduce(function(x,y) merge(x, y, by = "seqn", all.x = TRUE, all.y = TRUE),lapply(input$csvs$datapath, read.csv))
   })
@@ -258,6 +344,7 @@ server <- function(input, output, session) {
       "files.zip"
     },
     content = function(file) {
+<<<<<<< HEAD
       zip(zipfile=file, files="./NHANES_CLEAN")
     }
   )
@@ -353,6 +440,12 @@ server <- function(input, output, session) {
   
   
   
+=======
+      zip(zipfile=file, files=file.path(".", "NHANES_CLEAN"))
+    }
+  )
+  
+>>>>>>> 946003017209cfc129bb86fab4f3a56546260e65
 }
 
 shinyApp(ui, server)

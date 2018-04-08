@@ -14,27 +14,24 @@ ___
 
 ___
 ## Development
-The application will be a web application that will be powered by RShiny, which runs on top of the R scripting language.
+The application is a web application powered by RShiny, which is a web framework built using the R scripting language.
 
 ___
 ## Testing
- - Our project implements _RUnit_ for unit testing and Sylenium to automatically test the interface.
+ - Our project implements _RUnit_ for unit testing and does system testing.
 
 ___
 ## NHANES Data
 
 NHANES (National Health and Nutrition Examination Survey) is a program o studies meant to assess the health and nutrition within the US. The datasets combines interviews and physical examination data. NHANES is part of the National Center for Health Statistics, which is part of the US Center for Disease Control.
 
+The data is sourced from Mobile Examination Centers (MECs) from the CDC, Universities (ie. University o Minnesota), and hospitals.
+
 NHANES data is under the Open Database License, meaning that we are free do modify, share, and use the data so long as we maintain the same freedoms to others.
 
+ - [Data Source](https://wwwn.cdc.gov/nchs/nhanes/search/datapage.aspx)
  - [Data](https://www.cdc.gov/nchs/nhanes/index.htm)
  - [Data API](https://catalog.data.gov/dataset/national-health-and-nutrition-examination-survey-nhanes)
  - [Info & Licensing](https://www.healthdata.gov/dataset/national-health-and-nutrition-examination-survey-nhanes)
  - [Open DBL](https://en.wikipedia.org/wiki/Open_Database_License)
  - [Video](https://pic-sure.org/products/nhanes-unified-dataset)
-
-___
-## TO Document:
- - Sylenium
- - NHANES
- - ROxygen2 <Documentation & Coding Standards>
