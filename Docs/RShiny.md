@@ -47,3 +47,4 @@ A sample of the above application running can be found [here](https://apolinaro.
 		- input functions
 	- server() is a function that how to build and re-build the R objects in the UI
 		- output functions
+- Uses bootstrap
