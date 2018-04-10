@@ -1,4 +1,4 @@
-# Step 1: GitHub setup and cloning the project
+# Step 1: Get Project From Github
 The purpose of this spike it to get you familiar with cloning the project itself and updating your local repository. This is particularly useful when installing or upgrading to the latest version of WranglR.
 
 ## Cloning the project

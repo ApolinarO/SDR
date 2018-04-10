@@ -1,9 +1,9 @@
-# Step 4: AWS Server Restart and DNS Setup
+# Step 4: AWS Server Restart & DNS Setup
 
 This spike is to walk you through restarting the AWS server.
 
 ## Restart The Server
-You can either reboot the server using the terminal or through the AWS Menu:
+You can either reboot the server using the terminal or through AWS itself.
 
 ### Rebooting From Terminal
 When logged into the server, enter the following command:

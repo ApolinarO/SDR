@@ -14,7 +14,7 @@ The following guide is meant to help you get started in maintaining the project.
 - 1 Completed
 - 2 TO DO
 - 3 TO DO
-- 4 Current Work
+- 4 Completed
 
 ## Connecting To The Server
 
