@@ -1,19 +1,17 @@
-# Step 4: AWS Server Restart & DNS Setup
-The purpose of this guide is to walk you through the steps of restarting an AWS server and to setup a DNS for the app.
+# Step 4: AWS Server Maintenance & DNS Setup
+The purpose of this guide is to walk you through the steps of maintaining an AWS server and setting up a DNS for the app.
+
+## Maintain the server
+
 
 ## Restart The Server
 You can either reboot the server using the terminal or through AWS itself.
 
-### Rebooting From Terminal
-When logged into the server, enter the following command:
+To reboot from the terminal, when logged into the server, enter the following:
 
 	sudo reboot
 
-### Rebooting From AWS
-Log into your AWS account and navigate to EC2.
-![Services > EC2](./img/EC2MenuFind.png "Finding EC2 From the Homepage")
-
-Go to where AWS lists instances and right click the server instance. Select "Reboot".
+From AWS, navigate navigate to EC2. Go to where AWS lists instances and right click the server instance. Select "Reboot".
 ![Locate Instances on the sidebar](./img/RebootServer.png "Reboot Server")
 
 

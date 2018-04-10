@@ -14,13 +14,13 @@ Once installed, run the app.R file located here or the following command(s):
 	runApp("app.R")
 
 The app should output something similar to the following:
->Listening on http://127.0.0.1:7615
+>Listening on http://127.0.0.1:4676
 
-Copy the address listed onto your browser and a "Hello World" message should appear.
+Copy the address outputted by your app onto your browser and a "Hello World" message should appear:
 ![App running on the browser](./img/ShinyHelloWorld.png "Shiny Hello World Instance")
 
 
-## Setting Up A Project To ShinyApps.IO (Optional)
+## Deploying A Project To ShinyApps.IO (Optional)
 This part of the guide is meant to host the app within ShinyApps.io.
 
 [Create a ShinyApps.io Account](https://www.shinyapps.io/) and log in. You should see a UI that looks somehting like the following:
