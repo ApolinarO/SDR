@@ -1,19 +1,6 @@
-# AWS user Guide
+# Step 4: AWS Server Restart and DNS Setup
 
-The purpose of this spike is to get basic info about the NHANES data set.
-
-## Connecting To The Server
-
-Make sure that you downloaded the .pem file containing the key. Launch your terminal and follow the instructions that are listed when right clicking the instance and selecting connect.
-
-The command to ssh into the server looks something like the following
-
-	ssh -i 'path/to/thekey.pem' ubuntu@ec2-ip-of-server,us-east-2.compute.amazonaws.com
-
-An example command below
-
-	ssh -i '~/Documents/AWSKey/apolinaro_mac.pem' ubuntu@ec2-18-188-72-92.us-east-2.compute.amazonaws.com
-
+This spike is to walk you through restarting the AWS server.
 
 ## Restart The Server
 
@@ -23,3 +10,12 @@ Note that the public IP has likely changed. You will now have to update your DNS
 
 The publuc IP has likely changed and you will need to update your DNS if you already have one. Set your DNS to "ip:port", where ip is your new IPv4 address and port is the port number for shiny-server, which is most likely 3838. 
 
+## Setting Up A Domain Name (Optional)
+
+Setting up a domain name is very simple. All it involves is buying a spot in a Domain Name Server (DNS) and giving it an IP adress to run on. Some of the biggest DNS vendors includes Amazon and GoDaddy.
+
+Once you bought your DNS, use a configuration similar to the one below for your DNS setup:
+
+![Forward To ServerIP:Port#, Permanent Forward Type, Forward With Masking](./img/DNS\ Configuration.png "Sample DNS Configuration")
+
+When restarting your AWS server, be sure to update the Forward To field to your current IP and the port number.
