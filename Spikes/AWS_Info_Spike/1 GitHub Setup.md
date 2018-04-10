@@ -1,5 +1,5 @@
 # Step 1: Get Project From Github
-The purpose of this spike it to get you familiar with cloning the project itself and updating your local repository. This is particularly useful when installing or upgrading to the latest version of WranglR.
+The purpose of this guide is to get you to clone the project onto your local machine to become familiar with downloading and installing the latest version of the app.
 
 ## Cloning the project
 To clone the project, you do not need a GitHub account. To get the latest copy of WranglR, run the following:

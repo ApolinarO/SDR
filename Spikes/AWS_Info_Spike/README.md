@@ -4,15 +4,15 @@ The following guide is meant to help you get started in maintaining the project.
 
 1. Github setup and cloning the project
 2. RShiny on the local machine
-3. AWS server setuo and RShiny configuration for it
 	(Optional): Setting up the project on _ShinyApps_.io
+3. AWS Server Setup & RShiny Configuration
 4. AWS Server restart
 	(Optional): DNS Setup
 
 
 ## Notes
 - 1 Completed
-- 2 TO DO
+- 2 Current
 - 3 TO DO
 - 4 Completed
 

@@ -1,6 +1,5 @@
 # Step 4: AWS Server Restart & DNS Setup
-
-This spike is to walk you through restarting the AWS server.
+The purpose of this guide is to walk you through the steps of restarting an AWS server and to setup a DNS for the app.
 
 ## Restart The Server
 You can either reboot the server using the terminal or through AWS itself.
@@ -21,7 +20,7 @@ Go to where AWS lists instances and right click the server instance. Select "Reb
 ## Setting Up A Domain Name (Optional)
 Setting up a domain name is very simple. All it involves is buying a spot in a Domain Name Server (DNS) and giving it an IP adress to run on. Some of the biggest DNS vendors includes Amazon and GoDaddy.
 
-Once you bought your DNS, use a configuration similar to the one below for your DNS setup:
+Once you bought your DNS, setup its configuration similar to the one below:
 
 ![Forward To ServerIP:Port#, Permanent Forward Type, Forward With Masking](./img/DNSConfig.png "Sample DNS Configuration")
 
