@@ -2,6 +2,12 @@
 The purpose of this guide is to walk you through the steps of maintaining an AWS server and setting up a DNS for the app.
 
 ## Maintain the server
+Every so often you may want to run the following:
+
+	sudo apt-get update
+	sudo apt-get install
+
+Also note that your IP may change when you reboot the server.
 
 
 ## Restart The Server
