@@ -16,6 +16,6 @@ Setting up a domain name is very simple. All it involves is buying a spot in a D
 
 Once you bought your DNS, use a configuration similar to the one below for your DNS setup:
 
-![Forward To ServerIP:Port#, Permanent Forward Type, Forward With Masking](./img/DNS\ Configuration.png "Sample DNS Configuration")
+![Forward To ServerIP:Port#, Permanent Forward Type, Forward With Masking](./img/DNSConfig.png "Sample DNS Configuration")
 
 When restarting your AWS server, be sure to update the Forward To field to your current IP and the port number.
