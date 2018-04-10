@@ -3,15 +3,22 @@
 This spike is to walk you through restarting the AWS server.
 
 ## Restart The Server
+You can either reboot the server using the terminal or through the AWS Menu:
 
-To restart your server, log into your AWS account and navigate to EC2 or "Launch A Virtual Machine". You should eventualy end up on a page that lists instances. Locate the server you want to restart, right click, and restart it.
+### Rebooting From Terminal
+When logged into the server, enter the following command:
 
-Note that the public IP has likely changed. You will now have to update your DNS if you have one. Simple copy the ip address and get the hosting port number for shiny server, which is most likely 3838. Set the DNS to "forward and mask" with a permanent address of "ip:port", where ip is the new ip address and port is 
+	sudo reboot
 
-The publuc IP has likely changed and you will need to update your DNS if you already have one. Set your DNS to "ip:port", where ip is your new IPv4 address and port is the port number for shiny-server, which is most likely 3838. 
+### Rebooting From AWS
+Log into your AWS account and navigate to EC2.
+![Services > EC2](./img/EC2MenuFind.png "Finding EC2 From the Homepage")
+
+Go to where AWS lists instances and right click the server instance. Select "Reboot".
+![Locate Instances on the sidebar](./img/RebootServer.png "Reboot Server")
+
 
 ## Setting Up A Domain Name (Optional)
-
 Setting up a domain name is very simple. All it involves is buying a spot in a Domain Name Server (DNS) and giving it an IP adress to run on. Some of the biggest DNS vendors includes Amazon and GoDaddy.
 
 Once you bought your DNS, use a configuration similar to the one below for your DNS setup:
