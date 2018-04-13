@@ -23,7 +23,7 @@ Navigate back to instances. Right click the instance and select connect. When yo
 Also take note of what your IPv4 address located on the bottom right corner of the screen. Your server is now up and running!
 
 You know that you're connected to the server when you see the following screen:
-![Lists Ubuntu + IP](./img/AWSSuccessLogin "AWS Ubuntu Instance")
+![Lists Ubuntu + IP](./img/AWSSuccessLogin.png "AWS Ubuntu Instance")
 
 ## Setting Up Shiny Server
 You want to have the latest R Version available. For this step, make sure that you are connected to the server. According to [this source](https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-16-04-2), you would want to enter the following onto the console:
