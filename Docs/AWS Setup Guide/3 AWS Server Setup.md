@@ -6,7 +6,7 @@ You first need to [create an Amazon Web Services account](https://aws.amazon.com
 
 ![Services > EC2](./img/EC2MenuFind.png "Finding EC2 From the Homepage")
 
-Navigate to instances and click on the "Launch Instance" button:
+Navigate to instances and click on the "Launch Instance" button and **then select Ubuntu from the given menue**:
 
 ![Instances > Launch Instance](./img/LaunchNewInstanceFind.png "Launch new instance find")
 
@@ -17,13 +17,13 @@ Select the t2.micro instance, which is free tier available. Then launch. When pr
 
 This key pair is used to verify your identity when connecting to the server. **Keep it somewhere safe. DO NOT leave in the same directory as a git project. DO NOT delete or lose it**.
 
-Navigate back to instances. Right click the instance and select connect:
+Navigate back to instances. Right click the instance and select connect. When you do this, you would like to run the commands on Bash or if on Windows, PuTTY:
 ![Instances > connect](./img/ConnectToAWSInstance.png "Connect to the new instance")
 
 Also take note of what your IPv4 address located on the bottom right corner of the screen. Your server is now up and running!
 
 ## Setting Up Shiny Server
-You want to have the latest R Version available. According to [this source](https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-16-04-2), you would want to enter the following onto the console:
+You want to have the latest R Version available. For this step, make sure that you are connected to the server. According to [this source](https://www.digitalocean.com/community/tutorials/how-to-install-r-on-ubuntu-16-04-2), you would want to enter the following onto the console:
 
 	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 	sudo add-apt-repository 'deb [arch=amd64,i386] https://cran.rstudio.com/bin/linux/ubuntu xenial/'

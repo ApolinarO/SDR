@@ -8,6 +8,7 @@ The following guide is meant to help you get started in maintaining the project.
 	(TO DO): install the shiny app
 4. AWS Server Maintenance & DNS Setup
 	(Optional): DNS Setup
+5. Let's Encrypt For SSL Certification (Optional)
 
 ## Author(s)
 - Apolinar Ortega
