@@ -20,17 +20,21 @@ ui <-
              tabPanel("README",
                       h2("WELCOME TO wranglR release 1", align="center"),
                       p("Objective: To create an web application that will expedite the Data Wrangling Process"),
-                      p("Data Selection section will allow you to upload a csv file and select columns"),
-                      strong("NOTE: ROW SELECTION WILL BE IMPLEMENTED IN RELEASE 2"),
+          
+                      strong("XPT to CSV CONVERTER"),
+                      p("If you have XPT files on your local machine that you would like to convert use this tool"),
+                      p("NOTE: When specifying output directory, enter full file path for the converted csv (ex. /home/dir1/dir2/....)"),
+                      strong("DATA SELECTION"),
+                      p("Choose a csv file that you have on your local machine and select the columns that you want subset the observations that you want."),
+                      strong("DATA MERGING"),
+                      p("DATA MERGING"),
+                      p("Choose multiple csv files and merge them together by SEQN variable"),
+                      p("NOTE: STRONGLY RECOMMENDED THAT YOU MERGE DATA FILES BY YEAR"),
+                      p("DATA STACKING"),
+                      p("Choose a table type that has been found across mulitple years (ex. Demo_H,Demo_G,..etc"),
                       
                       p("Data Merging section will allow you to merge multiple tables based on a common index"),
                       strong("NOTE: INDEX MUST BE FOUND THROUGHOUT ALL TABLES"),
-                      
-                      p("Yet to come"),
-                      HTML(" <ul>
-                           <li>Row selection using slider input objects</li>
-                           <li>Data stacking using rbind()</li>
-                           </ul>"),
                       
                       p("Download the data Here"),
                       downloadButton('downloadNHANES', 'Download NHANES'),
@@ -57,8 +61,7 @@ ui <-
                             #selectInput("col", "Select a column", character(0))
                             textInput("directoryName", "Please Specify output directory"),
                             textInput("new_dataName", "Name your file", width = "50%"),
-                            actionButton('convert','Convert XPT to CSV'),
-                            downloadButton('newCSV_downloadData', 'Download')
+                            actionButton('convert','Convert XPT to CSV')
                           ),
                           mainPanel(
                             DT::dataTableOutput("mytable32")
@@ -244,12 +247,7 @@ server <- function(input, output, session) {
       #print("test2")
     })
     
-    output$table3 <- renderTable({
-      #req(mycsvs1())
-      #head(mycsvs1())
-      df <- as.data.frame(mycsvs1())
-      DT::datatable(df, options = list(lengthMenu = c(5, 30, 50), pageLength = 5))      
-    })
+   
   })
   
   output$downloadNHANES <- downloadHandler(
@@ -334,8 +332,6 @@ server <- function(input, output, session) {
     clean.csvs3 <- as.data.frame(row.merge.csvs())
    # clean.csvs3 <- clean.csvs3[, -grep(".x", colnames(clean.csvs3))] # Dropping any duplicated values from first CSV
     #clean.csvs3 <- clean.csvs3[, -grep(".y", colnames(clean.csvs3))] # Dropping any duplicated values from second CSV
-    print(nrow(clean.csvs3))
-    View(clean.csvs3)
     DT::datatable(clean.csvs3, options = list(lengthMenu = c(5, 30, 50), pageLength = 5))
   })  
   
