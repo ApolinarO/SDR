@@ -1,3 +1,5 @@
+# Use runApp(".") to run the file
+
 library("shiny")
 # Defines UI for the App
 ui = fluidPage("Hello World 8")
