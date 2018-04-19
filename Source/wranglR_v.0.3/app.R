@@ -106,8 +106,6 @@ ui <-
                           )
                         )
                       )
-                      
-                      
              ),
              
              
@@ -209,46 +207,26 @@ server <- function(input, output, session) {
     Reduce(function(x,y) merge(x, y, by = "seqn", all.x = TRUE, all.y = TRUE),lapply(input$csvs$datapath, read.csv))
   })
   
+  
+   merge_data <- reactive({
+    df <- mycsvs()
+  })
   output$table2 <- renderDataTable({
-    #req(mycsvs())
-    #head(mycsvs())
-    df <- as.data.frame(mycsvs())
-    DT::datatable(df, options = list(lengthMenu = c(5, 30, 50), pageLength = 5))
-    
-  })  
+    DT::datatable(merge_data(), options = list(lengthMenu = c(5, 30, 50), pageLength = 5))
+
+  })
+  
   output$downloadData2 <- downloadHandler(
     filename = function() {
       paste(input$dataName2, ".csv", sep = "")
     },
+
     content = function(file) {
-      write.csv(as.data.frame(mycsvs()), file, row.names = FALSE)
+      write.csv(merge_data(), file, row.names = FALSE)
     }
   ) 
   
-  #Stacking
   
-  #  rbind_sort_func <- function(...){
-  #   new_df1 <- (...)
-  #    new_df <- rbind(new_df1[1:length(...)])
-  #    print("New DF CReated")
-  #   str(new_df)
-  #sorted_data <- new_df[order(new_df$Order1),]
-  #return(sorted_data)
-  #    return(new_df[1])
-  # }
-  
-  observeEvent(input$stack,{
-    print("test")
-    mycsvs1<-reactive({
-      A <- lapply(input$csvs1$datapath, read.csv)
-      print(str(A))
-      print("test1")
-      rbind_sort_func(lapply(input$csvs1$datapath, read.csv))
-      #print("test2")
-    })
-    
-   
-  })
   
   output$downloadNHANES <- downloadHandler(
     filename = function() {
@@ -328,26 +306,23 @@ server <- function(input, output, session) {
     merge(row1, row2, by =intersect(names(row1),names(row2)) ,all=TRUE)
   })
   
+  stack_rows <- reactive({
+     df <- row.merge.csvs()
+      
+    })
+  
   output$table3 <- renderDataTable({
-    clean.csvs3 <- as.data.frame(row.merge.csvs())
-   # clean.csvs3 <- clean.csvs3[, -grep(".x", colnames(clean.csvs3))] # Dropping any duplicated values from first CSV
-    #clean.csvs3 <- clean.csvs3[, -grep(".y", colnames(clean.csvs3))] # Dropping any duplicated values from second CSV
-    DT::datatable(clean.csvs3, options = list(lengthMenu = c(5, 30, 50), pageLength = 5))
+    DT::datatable(stack_rows(), options = list(lengthMenu = c(5, 30, 50), pageLength = 5))
   })  
   
-  output$downloadData2 <- downloadHandler(
+  output$downloadData3 <- downloadHandler(
     filename = function() {
       paste(input$dataName_stack, ".csv", sep = "")
     },
     content = function(file) {
-      write.csv(clean.csvs3, file, row.names = FALSE)
+      write.csv(stack_rows(), file, row.names = FALSE)
     }
   ) 
-
-
-  
-  
-  
 }
 
 shinyApp(ui, server)

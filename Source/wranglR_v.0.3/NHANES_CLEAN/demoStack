@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <script type="application/shiny-singletons"></script>
+  <script type="application/html-dependencies">json2[2014.02.04];jquery[1.12.4];shiny[1.0.5];font-awesome[4.7.0];htmlwidgets[1.0];datatables-css[0.0.0];datatables-binding[0.4];crosstalk[1.0.0];bootstrap[3.3.7]</script>
+<script src="shared/json2-min.js"></script>
+<script src="shared/jquery.min.js"></script>
+<link href="shared/shiny.css" rel="stylesheet" />
+<script src="shared/shiny.min.js"></script>
+<link href="shared/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<script src="htmlwidgets-1.0/htmlwidgets.js"></script>
+<link href="datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="datatables-binding-0.4/datatables.js"></script>
+<link href="crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="shared/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="shared/bootstrap/js/bootstrap.min.js"></script>
+<script src="shared/bootstrap/shim/html5shiv.min.js"></script>
+<script src="shared/bootstrap/shim/respond.min.js"></script>  <title>wranglR</title>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="navbar-brand">wranglR</span>
+      </div>
+      <ul class="nav navbar-nav" data-tabsetid="2171">
+        <li class="active">
+          <a href="#tab-2171-1" data-toggle="tab" data-value="README">README</a>
+        </li>
+        <li>
+          <a href="#tab-2171-2" data-toggle="tab" data-value="SAS XPT to CSV Converter">SAS XPT to CSV Converter</a>
+        </li>
+        <li>
+          <a href="#tab-2171-3" data-toggle="tab" data-value="Data Selection">Data Selection</a>
+        </li>
+        <li>
+          <a href="#tab-2171-4" data-toggle="tab" data-value="Data merging">Data merging</a>
+        </li>
+        <li>
+          <a href="#tab-2171-5" data-toggle="tab" data-value="Data Stacking">Data Stacking</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="tab-content" data-tabsetid="2171">
+      <div class="tab-pane active" data-value="README" id="tab-2171-1">
+        <h2 align="center">WELCOME TO wranglR release 1</h2>
+        <p>Objective: To create an web application that will expedite the Data Wrangling Process</p>
+        <strong>XPT to CSV CONVERTER</strong>
+        <p>If you have XPT files on your local machine that you would like to convert use this tool</p>
+        <p>NOTE: When specifying output directory, enter full file path for the converted csv (ex. /home/dir1/dir2/....)</p>
+        <strong>DATA SELECTION</strong>
+        <p>Choose a csv file that you have on your local machine and select the columns that you want subset the observations that you want.</p>
+        <strong>DATA MERGING</strong>
+        <p>DATA MERGING</p>
+        <p>Choose multiple csv files and merge them together by SEQN variable</p>
+        <p>NOTE: STRONGLY RECOMMENDED THAT YOU MERGE DATA FILES BY YEAR</p>
+        <p>DATA STACKING</p>
+        <p>Choose a table type that has been found across mulitple years (ex. Demo_H,Demo_G,..etc</p>
+        <p>Data Merging section will allow you to merge multiple tables based on a common index</p>
+        <strong>NOTE: INDEX MUST BE FOUND THROUGHOUT ALL TABLES</strong>
+        <p>Download the data Here</p>
+        <a id="downloadNHANES" class="btn btn-default shiny-download-link " href="" target="_blank" download>
+          <i class="fa fa-download"></i>
+          Download NHANES
+        </a>
+        <p>Dataset documentation</p>
+        <strong>DISCLAIMER: For this small, sanitized dataset, dataframe columns are consistent across all years</strong>
+        <ul>
+                           <li><a href='https://wwwn.cdc.gov/Nchs/Nhanes/2013-2014/DEMO_H.htm'>Demographics</a></li>
+                           <li><a href='https://wwwn.cdc.gov/Nchs/Nhanes/2013-2014/HEPC_H.htm'>Hepatitis C: RNA (HCV-RNA) and Hepatitis C Genotype </a></li>
+                           <li><a href='https://wwwn.cdc.gov/Nchs/Nhanes/2013-2014/TRIGLY_H.htm'>Cholesterol - LDL & Triglycerides </a></li>
+                           <li><a href='https://wwwn.cdc.gov/Nchs/Nhanes/2013-2014/HDL_H.htm'>Cholesterol - HDL</a></li>
+                           <li><a href='https://wwwn.cdc.gov/Nchs/Nhanes/2013-2014/HIV_H.htm'>HIV Antibody Test</a></li>
+                           <li><a href='https://wwwn.cdc.gov/Nchs/Nhanes/2013-2014/BMX_H.htm'>Body Measures</a></li>
+                           </ul>
+      </div>
+      <div class="tab-pane" data-value="SAS XPT to CSV Converter" id="tab-2171-2">
+        <div class="row">
+          <div class="row">
+            <div class="col-sm-4">
+              <form class="well">
+                <div class="form-group shiny-input-container">
+                  <label>Choose XPT File</label>
+                  <div class="input-group">
+                    <label class="input-group-btn">
+                      <span class="btn btn-default btn-file">
+                        Browse...
+                        <input id="xptfile" name="xptfile" type="file" style="display: none;"/>
+                      </span>
+                    </label>
+                    <input type="text" class="form-control" placeholder="No file selected" readonly="readonly"/>
+                  </div>
+                  <div id="xptfile_progress" class="progress progress-striped active shiny-file-input-progress">
+                    <div class="progress-bar"></div>
+                  </div>
+                </div>
+                <div class="form-group shiny-input-container">
+                  <label for="directoryName">Please Specify output directory</label>
+                  <input id="directoryName" type="text" class="form-control" value=""/>
+                </div>
+                <div class="form-group shiny-input-container" style="width: 50%;">
+                  <label for="new_dataName">Name your file</label>
+                  <input id="new_dataName" type="text" class="form-control" value=""/>
+                </div>
+                <button id="convert" type="button" class="btn btn-default action-button">Convert XPT to CSV</button>
+              </form>
+            </div>
+            <div class="col-sm-8">
+              <div id="mytable32" style="width:100%; height:auto; " class="datatables html-widget html-widget-output"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" data-value="Data Selection" id="tab-2171-3">
+        <div class="row">
+          <div class="row">
+            <div class="col-sm-4">
+              <form class="well">
+                <div class="form-group shiny-input-container">
+                  <label>Choose CSV File</label>
+                  <div class="input-group">
+                    <label class="input-group-btn">
+                      <span class="btn btn-default btn-file">
+                        Browse...
+                        <input id="file" name="file" type="file" style="display: none;"/>
+                      </span>
+                    </label>
+                    <input type="text" class="form-control" placeholder="No file selected" readonly="readonly"/>
+                  </div>
+                  <div id="file_progress" class="progress progress-striped active shiny-file-input-progress">
+                    <div class="progress-bar"></div>
+                  </div>
+                </div>
+                <div id="columns" class="form-group shiny-input-checkboxgroup shiny-input-container">
+                  <label class="control-label" for="columns">Select Columns</label>
+                  <div class="shiny-options-group"></div>
+                </div>
+                <button id="updateButton" type="button" class="btn btn-default action-button">Update View</button>
+                <div class="form-group shiny-input-container" style="width: 50%;">
+                  <label for="dataName">Name your file</label>
+                  <input id="dataName" type="text" class="form-control" value=""/>
+                </div>
+                <a id="downloadData" class="btn btn-default shiny-download-link " href="" target="_blank" download>
+                  <i class="fa fa-download"></i>
+                  Download
+                </a>
+              </form>
+            </div>
+            <div class="col-sm-8">
+              <div id="mytable1" style="width:100%; height:auto; " class="datatables html-widget html-widget-output"></div>
+              <div id="selected" class="shiny-text-output"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" data-value="Data merging" id="tab-2171-4">
+        <div class="row">
+          <div class="row">
+            <div class="col-sm-4">
+              <form class="well">
+                <div class="form-group shiny-input-container">
+                  <label>Choose CSV File</label>
+                  <div class="input-group">
+                    <label class="input-group-btn">
+                      <span class="btn btn-default btn-file">
+                        Browse...
+                        <input id="csvs" name="csvs" type="file" style="display: none;" multiple="multiple"/>
+                      </span>
+                    </label>
+                    <input type="text" class="form-control" placeholder="No file selected" readonly="readonly"/>
+                  </div>
+                  <div id="csvs_progress" class="progress progress-striped active shiny-file-input-progress">
+                    <div class="progress-bar"></div>
+                  </div>
+                </div>
+                <div class="form-group shiny-input-container" style="width: 50%;">
+                  <label for="dataName2">Name your file</label>
+                  <input id="dataName2" type="text" class="form-control" value=""/>
+                </div>
+                <a id="downloadData2" class="btn btn-default shiny-download-link " href="" target="_blank" download>
+                  <i class="fa fa-download"></i>
+                  Download
+                </a>
+              </form>
+            </div>
+            <div class="col-sm-8">
+              <div id="table2" style="width:100%; height:auto; " class="datatables html-widget html-widget-output"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" data-value="Data Stacking" id="tab-2171-5">
+        <div class="row">
+          <div class="row">
+            <div class="col-sm-4">
+              <form class="well">
+                <div class="form-group shiny-input-container">
+                  <label>Choose CSV File</label>
+                  <div class="input-group">
+                    <label class="input-group-btn">
+                      <span class="btn btn-default btn-file">
+                        Browse...
+                        <input id="csvs2" name="csvs2" type="file" style="display: none;"/>
+                      </span>
+                    </label>
+                    <input type="text" class="form-control" placeholder="No file selected" readonly="readonly"/>
+                  </div>
+                  <div id="csvs2_progress" class="progress progress-striped active shiny-file-input-progress">
+                    <div class="progress-bar"></div>
+                  </div>
+                </div>
+                <div class="form-group shiny-input-container">
+                  <label>Choose CSV File</label>
+                  <div class="input-group">
+                    <label class="input-group-btn">
+                      <span class="btn btn-default btn-file">
+                        Browse...
+                        <input id="csvs3" name="csvs3" type="file" style="display: none;"/>
+                      </span>
+                    </label>
+                    <input type="text" class="form-control" placeholder="No file selected" readonly="readonly"/>
+                  </div>
+                  <div id="csvs3_progress" class="progress progress-striped active shiny-file-input-progress">
+                    <div class="progress-bar"></div>
+                  </div>
+                </div>
+                <div class="form-group shiny-input-container" style="width: 50%;">
+                  <label for="dataName_stack">Name your file</label>
+                  <input id="dataName_stack" type="text" class="form-control" value=""/>
+                </div>
+                <a id="downloadData3" class="btn btn-default shiny-download-link " href="" target="_blank" download>
+                  <i class="fa fa-download"></i>
+                  Download
+                </a>
+              </form>
+            </div>
+            <div class="col-sm-8">
+              <div id="table3" style="width:100%; height:auto; " class="datatables html-widget html-widget-output"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
