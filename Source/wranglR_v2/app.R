@@ -4,7 +4,9 @@
 #
 # Find out more about building applications with Shiny here:
 #
-#    http://shiny.rstudio.com/
+#    http://shiny.rstudio.com
+# Authors: Antonio Ruiz, Apolinar Ortega, Jacob Darling
+#
 #
 
 library(Hmisc)
@@ -12,7 +14,6 @@ library(SASxport)
 library(shiny)
 library(DT)
 #library("purrr")
-
 ui <- 
   
   navbarPage("wranglR",
@@ -58,14 +59,10 @@ ui <-
                         sidebarLayout(
                           sidebarPanel(
                             fileInput("xptfile", "Choose XPT File"),
-                            #selectInput("col", "Select a column", character(0))
-                            textInput("directoryName", "Please Specify output directory"),
-                            textInput("new_dataName", "Name your file", width = "50%"),
-                            actionButton('convert','Convert XPT to CSV')
+                            downloadButton('downloadData_xpt', 'Download')
                           ),
                           mainPanel(
-                            DT::dataTableOutput("mytable32")
-                           # textOutput("selected")
+                            DT::dataTableOutput("mytableXPT")
                           )
                         )
                       )
@@ -78,7 +75,6 @@ ui <-
                         sidebarLayout(
                           sidebarPanel(
                             fileInput("file", "Choose CSV File"),
-                            #selectInput("col", "Select a column", character(0))
                             checkboxGroupInput("columns","Select Columns",character(0)),
                             actionButton("updateButton","Update View"),
                             textInput("dataName", "Name your file", width = "50%"),
@@ -155,8 +151,6 @@ server <- function(input, output, session) {
     df <- data.frame(data())
       insertUI(
       print("inside the slide"),
-      #print(nrow(df)),
-      #print(max(nrow(df))),
       selector = "#updateButton",
       where = "beforeBegin",
       ui = sliderInput(inputId = "rows" , label = "Observations",
@@ -239,60 +233,40 @@ server <- function(input, output, session) {
   
   
   
-  ###XPT To CSV Converter
+  #NOTE DEPENDENCIES FOR XPT Conversion
+  #----sudo apt-get install libxml2-dev------
+  #----sudo apt-get install libudunits2-dev-----
+  #----install.packages('rio')--------
+  #----install.package('tools')-------
+  library(rio)
+  library(tools)
+ ##xpt converter
   
-  check_dir <-function(directory){
-    
-    flag <-0
-    result <- tryCatch({
-      setwd(directory)
-      print('about to process my data')
-      return(flag)
-      
-    }, warning = function(war) {
-      
-      # warning handler picks up where error was generated
-      print('warning')
-      flag <- -1
-      return(flag)
-    }, error = function(err) {
-      
-      showNotification(paste("ERROR, DID NOT SELECT PROPER DIRECTORY "), duration = 5,type = 'error')
-      Sys.sleep(5)
-      flag <- -1
-      return(flag)
-      
-    }, finally = {
-      print('Exiting Try Catch')
-    }) # END tryCatch
-    
-  }
-  XpttoCsv.func <- function(a,b,c=NULL){
-      xpt.name <- paste(a) #get the name of the xpt file
-      csv.name <- paste(c,b,".csv",sep="") #create path and file name of new csv
-      dat <- sasxport.get(xpt.name) # conversion
-      write.csv(dat[,-1],file=csv.name,row.names = FALSE)
-  }
+  #BY Default will take an XPT File and Convert to XPT
+  output$downloadData_xpt <- downloadHandler(
+    filename = function() {
+      name <- basename(file_path_sans_ext(input$xptfile$name))
+      print(name)
+      paste0(name, '.csv')
+    },
+    content = function(file) {
+      input_file <- input$xptfile
+      input_file_format <- tools::file_ext(input_file$name)
   
-  
-  observeEvent(input$convert, {
-    if (is.null(input$xptfile)) print('select a damn file')
-    
-    xpt <-input$xptfile
-    print('data is loaded')
-    xpt.name <- xpt$name
-    dir.output <- input$directoryName
-    new_csv_name <- input$new_dataName
-    val <- check_dir(dir.output) #function to check directory
-    if(val == 0){  #convert only if we have a valid directory
-      XpttoCsv.func(xpt.name,new_csv_name,dir.output)
-      
+      if (is.null(input_file))
+        return(NULL)
+      else {
+        db <- rio::import(file = input_file$datapath,
+                          format = input_file_format)
+        
+          df <- rio::export(x = db,
+                      file = file, 
+                      format = 'csv')
+        
+      }
     }
-
-
-  })
-  
-  
+  )
+ 
   ###data stacking stufff
   
   
