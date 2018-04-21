@@ -13,6 +13,8 @@ library(Hmisc)
 library(SASxport)
 library(shiny)
 library(DT)
+library(rio)
+library(tools)
 #library("purrr")
 ui <- 
   
@@ -126,6 +128,10 @@ ui <-
 
 
 server <- function(input, output, session) {
+  # Allows for more upload size
+  options(shiny.maxRequestSize=100*1024^2)
+          
+
   ####	Sub Setting Data	####
   ###get and load data
   data <- reactive({
@@ -238,8 +244,6 @@ server <- function(input, output, session) {
   #----sudo apt-get install libudunits2-dev-----
   #----install.packages('rio')--------
   #----install.package('tools')-------
-  library(rio)
-  library(tools)
  ##xpt converter
   
   #BY Default will take an XPT File and Convert to XPT

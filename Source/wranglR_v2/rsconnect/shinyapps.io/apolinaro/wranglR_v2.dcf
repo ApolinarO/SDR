@@ -1,0 +1,12 @@
+name: wranglR_v2
+title: wranglR_v2
+username:
+account: apolinaro
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 327223
+bundleId: 1331025
+url: https://apolinaro.shinyapps.io/wranglR_v2/
+when: 1524329889.23164
+asMultiple: FALSE
+asStatic: FALSE
