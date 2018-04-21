@@ -33,6 +33,14 @@ You want to have the latest R Version available. For this step, make sure that y
 	sudo apt-get update
 	sudo apt-get install r-base
 
+And then the following for support:
+
+	sudo apt-get install libcurl4-gnutls-dev
+	sudo apt-get install openssl-dev
+	sudo apt-get install libxml2-dev
+	sudo apt-get install libudunits2-dev
+	sudo apt-get install libssl-dev
+
 Test that it works by running the following:
 
 	sudo -i R
@@ -45,8 +53,16 @@ Run the following package installs:
 	install.packages("Hmisc")
 	install.packages("SASxport")
 	install.packages("DT")
+	install.packages("devtools")
+	install.packages("tidyverse")
+	devtools::install_github("rstudio/shinytest")
+	shinytest::installDependencies()
+	devtools::install_github("leeper/rio")
+	install_formats()
+
 
 Exit the R session by running the q() command.
+
 
 According to [this source](https://www.rstudio.com/products/shiny/download-server/), run the following commands to install Shiny Server itself:
 
