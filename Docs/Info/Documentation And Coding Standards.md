@@ -3,9 +3,6 @@
 ## Documentation
 Alongside each of the spikes, there will be a markdown file that displays basic information on what is expected of each user.
 
-### ROxygen2
- - We have an [ROxygen2 Spike](../Spikes/ROxygen2%20Spikes) that demonstrates the framework.
-
 ### Markdown Resources
  - [MarkDown Editor](https://dillinger.io/)
  - [Print MarkDown](https://gitprint.com/)
